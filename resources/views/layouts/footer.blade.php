@@ -56,7 +56,7 @@ $.widget.bridge('uibutton', $.ui.button)
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('dist/js/demo.js')}}"></script>
 <script>
-$('[data-widget="pushmenu"]').PushMenu('collapse');
+// $('[data-widget="pushmenu"]').PushMenu('collapse');
 
 </script>
 

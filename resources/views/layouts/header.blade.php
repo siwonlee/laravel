@@ -31,6 +31,17 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
+        <style>
+
+*{
+
+font-size: 13px;
+
+}
+
+
+        </style>
+
         @livewireStyles
 
         <!-- Scripts -->
@@ -120,11 +131,11 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
-
+              <? $segment = Request::segment(1);?>
 
                <li class="nav-header">UPC/PLU</li>
-          <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
+          <li class="nav-item has-treeview  @if( $segment == 'approved') menu-open @endif  ">
+            <a href="#" class="nav-link @if( $segment == 'approved') active @endif ">
               <i class="nav-icon fas fa-thumbs-up"></i>
               <p>
                 Approved
@@ -138,27 +149,27 @@
 
 
 
-               <li class="nav-item"><a href="upc_verified.php" class="nav-link">  <p>All</p> <span class="label label-success label-as-badge">  </span></a> </li>
-               <li class="nav-item"><a href="upc_verified.php?cate=2" class="nav-link"><p>02-Cheese or Tofu</p> <span class="label label-success label-as-badge">  </span></a> </li>
-                 <li class="nav-item"><a href="upc_verified.php?cate=3" class="nav-link"><p>03-Eggs </p><span class="label label-success label-as-badge">  </span> </a> </li>
-                 <li class="nav-item"><a href="upc_verified.php?cate=5"class="nav-link"><p>05-Breakfast Cereal </p><span class="label label-success label-as-badge">  </span> </a> </li>
-                 <li class="nav-item"><a href="upc_verified.php?cate=6"class="nav-link"><p>06-Legumes </p><span class="label label-success label-as-badge"> </span> </a> </li>
-                 <li class="nav-item"><a href="upc_verified.php?cate=8"class="nav-link"><p>08-Fish </p><span class="label label-success label-as-badge">  </span> </a> </li>
-                 <li class="nav-item"><a href="upc_verified.php?cate=9"class="nav-link"><p>09-Infant Cereal </p><span class="label label-success label-as-badge">  </span> </a> </li>
-                 <li class="nav-item"><a href="upc_verified.php?cate=12"class="nav-link"><p>12-Infant Fruits & Vegetables</p> <span class="label label-success label-as-badge">  </span> </a> </li>
-                 <li class="nav-item"><a href="upc_verified.php?cate=13"class="nav-link"><p>13-Infant Meats</p> <span class="label label-success label-as-badge"> </span> </a> </li>
-                 <li class="nav-item"><a href="upc_verified.php?cate=16"class="nav-link"><p>16-Bread/Whole Grains </p><span class="label label-success label-as-badge">  </span> </a> </li>
-                 <li class="nav-item"><a href="upc_verified.php?cate=19"class="nav-link"><p>19-Fruit & Vegetables Cash Value </p><span class="label label-success label-as-badge">  </span> </a> </li>
-                 <li class="nav-item"><a href="upc_verified.php?cate=21"class="nav-link"><p>21-Infant Formula(IF) </p><span class="label label-success label-as-badge">  </span> </a> </li>
-                 <li class="nav-item"><a href="upc_verified.php?cate=31"class="nav-link"><p>31-Exempt Infant Formula(EXF) </p><span class="label label-success label-as-badge"> </span> </a> </li>
-                 <li class="nav-item"><a href="upc_verified.php?cate=41"class="nav-link"><p>41-WIC Eligible Nutritionals</p> <span class="label label-success label-as-badge">  </span> </a> </li>
+               <li class="nav-item"><a href="{{route('approved')}}" class="nav-link">  <p>All</p> <span class="label label-success label-as-badge">  </span></a> </li>
+               <li class="nav-item"><a href="{{asset('approved/2')}}" class="nav-link"><p>02-Cheese or Tofu</p> <span class="label label-success label-as-badge">  </span></a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/3')}}" class="nav-link"><p>03-Eggs </p><span class="label label-success label-as-badge">  </span> </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/5')}}" class="nav-link"><p>05-Breakfast Cereal </p><span class="label label-success label-as-badge">  </span> </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/6')}}" class="nav-link"><p>06-Legumes </p><span class="label label-success label-as-badge"> </span> </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/8')}}" class="nav-link"><p>08-Fish </p><span class="label label-success label-as-badge">  </span> </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/9')}}" class="nav-link"><p>09-Infant Cereal </p><span class="label label-success label-as-badge">  </span> </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/12')}}" class="nav-link"><p>12-Infant Fruits & Vegetables</p> <span class="label label-success label-as-badge">  </span> </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/13')}}" class="nav-link"><p>13-Infant Meats</p> <span class="label label-success label-as-badge"> </span> </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/16')}}" class="nav-link"><p>16-Bread/Whole Grains </p><span class="label label-success label-as-badge">  </span> </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/19')}}" class="nav-link"><p>19-Fruit & Vegetables Cash Value </p><span class="label label-success label-as-badge">  </span> </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/21')}}" class="nav-link"><p>21-Infant Formula(IF) </p><span class="label label-success label-as-badge">  </span> </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/31')}}" class="nav-link"><p>31-Exempt Infant Formula(EXF) </p><span class="label label-success label-as-badge"> </span> </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/41')}}" class="nav-link"><p>41-WIC Eligible Nutritionals</p> <span class="label label-success label-as-badge">  </span> </a> </li>
 
-                 <li class="nav-item"><a href="upc_verified.php?cate=50"class="nav-link"> <p>50-Yogurt</p> <span class="label label-success label-as-badge">  </span></a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/50')}}" class="nav-link"> <p>50-Yogurt</p> <span class="label label-success label-as-badge">  </span></a> </li>
 
-                 <li class="nav-item"><a href="upc_verified.php?cate=51"class="nav-link"> <p>51-Milk-whole </p><span class="label label-success label-as-badge">  </span></a> </li>
-                 <li class="nav-item"><a href="upc_verified.php?cate=52"class="nav-link"><p>52-Milk Low Fat/fat free</p> <span class="label label-success label-as-badge">  </span> </a> </li>
-                 <li class="nav-item"><a href="upc_verified.php?cate=53"class="nav-link"><p>53-Frozen Juice </p><span class="label label-success label-as-badge">  </span> </a> </li>
-                 <li class="nav-item"><a href="upc_verified.php?cate=54"class="nav-link"><p>54-Juice-64oz</p> <span class="label label-success label-as-badge">  </span> </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/51')}}" class="nav-link"> <p>51-Milk-whole </p><span class="label label-success label-as-badge">  </span></a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/52')}}" class="nav-link"><p>52-Milk Low Fat/fat free</p> <span class="label label-success label-as-badge">  </span> </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/53')}}" class="nav-link"><p>53-Frozen Juice </p><span class="label label-success label-as-badge">  </span> </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/54')}}" class="nav-link"><p>54-Juice-64oz</p> <span class="label label-success label-as-badge">  </span> </a> </li>
 
 
 
@@ -178,7 +189,7 @@
 
 
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <a href="{{route('pending')}}" class="nav-link @if( $segment == 'pending') active @endif">
               <i class="nav-icon fas fa-flag"></i>
               <p>
                 Pending
@@ -199,7 +210,7 @@
 
 
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="{{route('denied')}}" class="nav-link @if( $segment == 'denied') active @endif">
                 <i class="nav-icon fas fa-thumbs-down"></i>
               <p>
                 Denied

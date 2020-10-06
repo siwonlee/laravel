@@ -32,3 +32,19 @@ Route::get('/test', function () {
 });
 
 Route::get('/category', 'CategoryController@index');
+Route::get('/upc', 'UpcController@index');
+
+Route::get('/temp', function () {
+    return view('temp');
+});
+
+Route::get('/approved', 'UpcController@approved')->name('approved');
+Route::get('/approved/{cate}', 'UpcController@approved_cate')->name('approved_cate');
+Route::get('/denied', 'UpcController@denied')->name('denied');
+Route::get('/pending', 'UpcController@pending')->name('pending');
+Route::get('/recent_edit', 'UpcController@recent_edit')->name('recent_edit');
+
+
+Route::get('/t', function () {
+    return view('t1');
+});
