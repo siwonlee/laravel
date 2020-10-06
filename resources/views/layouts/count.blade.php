@@ -3,6 +3,8 @@
 
 //$upcs = App\Models\Upc::where('verify',2)->paginate(20) ;
 // $upcs = App\Models\User::find(2) ;
+
+
 $c_approved = App\Models\Upc::where('verify',1)->count() ;
 $c_pending = App\Models\Upc::where('verify',2)->count() ;
 $c_denied = App\Models\Upc::where('verify',3)->count() ;
@@ -28,23 +30,4 @@ $c_a54 = App\Models\Upc::where('verify',1)->where('category',54)->count() ;
 
 
 
-
-
-
-dd($c_approved);
-
-//dd($upcs->news)
-
-// foreach ($upcs->news as $news)
-
-// echo $news->title."-".$news->description."<hr>";
-
-//
-
-
-//$current = url()->current();
-//echo $request->path();
-//echo $current;
-
-// $segment = Request::segment(1);
-// echo $segment;
+?>

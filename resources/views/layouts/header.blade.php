@@ -46,7 +46,39 @@ font-size: 13px;
 
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.6.0/dist/alpine.js" defer></script>
-</head>
+
+
+
+<?
+
+$c_approved = App\Models\Upc::where('verify',1)->count() ;
+$c_pending = App\Models\Upc::where('verify',2)->count() ;
+$c_denied = App\Models\Upc::where('verify',3)->count() ;
+$c_a2 = App\Models\Upc::where('verify',1)->where('category',2)->count() ;
+$c_a3 = App\Models\Upc::where('verify',1)->where('category',3)->count() ;
+$c_a5 = App\Models\Upc::where('verify',1)->where('category',5)->count() ;
+$c_a6 = App\Models\Upc::where('verify',1)->where('category',6)->count() ;
+$c_a8 = App\Models\Upc::where('verify',1)->where('category',8)->count() ;
+$c_a9 = App\Models\Upc::where('verify',1)->where('category',9)->count() ;
+$c_a12 = App\Models\Upc::where('verify',1)->where('category',12)->count() ;
+$c_a13 = App\Models\Upc::where('verify',1)->where('category',13)->count() ;
+$c_a16 = App\Models\Upc::where('verify',1)->where('category',16)->count() ;
+$c_a19 = App\Models\Upc::where('verify',1)->where('category',19)->count() ;
+$c_a21 = App\Models\Upc::where('verify',1)->where('category',21)->count() ;
+$c_a31 = App\Models\Upc::where('verify',1)->where('category',31)->count() ;
+$c_a41 = App\Models\Upc::where('verify',1)->where('category',41)->count() ;
+$c_a50 = App\Models\Upc::where('verify',1)->where('category',50)->count() ;
+$c_a51 = App\Models\Upc::where('verify',1)->where('category',51)->count() ;
+$c_a52 = App\Models\Upc::where('verify',1)->where('category',52)->count() ;
+$c_a53 = App\Models\Upc::where('verify',1)->where('category',53)->count() ;
+$c_a54 = App\Models\Upc::where('verify',1)->where('category',54)->count() ;
+
+
+?>
+
+
+
+    </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
@@ -139,6 +171,7 @@ font-size: 13px;
               <i class="nav-icon fas fa-thumbs-up"></i>
               <p>
                 Approved
+
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -148,28 +181,27 @@ font-size: 13px;
 
 
 
+            <li class="nav-item"><a href="{{route('approved')}}" class="nav-link">  <p>All <span class="badge badge-success right">{{$c_approved}} </span> </p>  </a> </li>
+               <li class="nav-item"><a href="{{asset('approved/2')}}" class="nav-link"><p>02-Cheese or Tofu<span class="badge badge-success right">{{$c_a2}} </span> </p>  </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/3')}}" class="nav-link"><p>03-Eggs <span class="badge badge-success right">{{$c_a3}} </span> </p>  </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/5')}}" class="nav-link"><p>05-Breakfast Cereal <span class="badge badge-success right">{{$c_a5}} </span> </p>  </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/6')}}" class="nav-link"><p>06-Legumes <span class="badge badge-success right">{{$c_a6}} </span> </p> </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/8')}}" class="nav-link"><p>08-Fish<span class="badge badge-success right">{{$c_a8}} </span>  </p>  </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/9')}}" class="nav-link"><p>09-Infant Cereal <span class="badge badge-success right">{{$c_a9}} </span> </p>  </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/12')}}" class="nav-link"><p>12-Infant Fruits & Vegetables<span class="badge badge-success right">{{$c_a12}} </span> </p>   </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/13')}}" class="nav-link"><p>13-Infant Meats<span class="badge badge-success right">{{$c_a13}} </span> </p>   </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/16')}}" class="nav-link"><p>16-Bread/Whole Grains <span class="badge badge-success right">{{$c_a16}} </span> </p>  </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/19')}}" class="nav-link"><p>19-Fruit & Vegetables Cash Value<span class="badge badge-success right">{{$c_a19}} </span>  </p>  </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/21')}}" class="nav-link"><p>21-Infant Formula(IF)<span class="badge badge-success right">{{$c_a21}} </span>  </p>  </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/31')}}" class="nav-link"><p>31-Exempt Infant Formula(EXF)<span class="badge badge-success right">{{$c_a31}} </span>  </p>  </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/41')}}" class="nav-link"><p>41-WIC Eligible Nutritionals<span class="badge badge-success right">{{$c_a41}} </span> </p>   </a> </li>
 
-               <li class="nav-item"><a href="{{route('approved')}}" class="nav-link">  <p>All</p> <span class="label label-success label-as-badge">  </span></a> </li>
-               <li class="nav-item"><a href="{{asset('approved/2')}}" class="nav-link"><p>02-Cheese or Tofu</p> <span class="label label-success label-as-badge">  </span></a> </li>
-                 <li class="nav-item"><a href="{{asset('approved/3')}}" class="nav-link"><p>03-Eggs </p><span class="label label-success label-as-badge">  </span> </a> </li>
-                 <li class="nav-item"><a href="{{asset('approved/5')}}" class="nav-link"><p>05-Breakfast Cereal </p><span class="label label-success label-as-badge">  </span> </a> </li>
-                 <li class="nav-item"><a href="{{asset('approved/6')}}" class="nav-link"><p>06-Legumes </p><span class="label label-success label-as-badge"> </span> </a> </li>
-                 <li class="nav-item"><a href="{{asset('approved/8')}}" class="nav-link"><p>08-Fish </p><span class="label label-success label-as-badge">  </span> </a> </li>
-                 <li class="nav-item"><a href="{{asset('approved/9')}}" class="nav-link"><p>09-Infant Cereal </p><span class="label label-success label-as-badge">  </span> </a> </li>
-                 <li class="nav-item"><a href="{{asset('approved/12')}}" class="nav-link"><p>12-Infant Fruits & Vegetables</p> <span class="label label-success label-as-badge">  </span> </a> </li>
-                 <li class="nav-item"><a href="{{asset('approved/13')}}" class="nav-link"><p>13-Infant Meats</p> <span class="label label-success label-as-badge"> </span> </a> </li>
-                 <li class="nav-item"><a href="{{asset('approved/16')}}" class="nav-link"><p>16-Bread/Whole Grains </p><span class="label label-success label-as-badge">  </span> </a> </li>
-                 <li class="nav-item"><a href="{{asset('approved/19')}}" class="nav-link"><p>19-Fruit & Vegetables Cash Value </p><span class="label label-success label-as-badge">  </span> </a> </li>
-                 <li class="nav-item"><a href="{{asset('approved/21')}}" class="nav-link"><p>21-Infant Formula(IF) </p><span class="label label-success label-as-badge">  </span> </a> </li>
-                 <li class="nav-item"><a href="{{asset('approved/31')}}" class="nav-link"><p>31-Exempt Infant Formula(EXF) </p><span class="label label-success label-as-badge"> </span> </a> </li>
-                 <li class="nav-item"><a href="{{asset('approved/41')}}" class="nav-link"><p>41-WIC Eligible Nutritionals</p> <span class="label label-success label-as-badge">  </span> </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/50')}}" class="nav-link"> <p>50-Yogurt <span class="badge badge-success right">{{$c_a50}} </span> </p>  </a> </li>
 
-                 <li class="nav-item"><a href="{{asset('approved/50')}}" class="nav-link"> <p>50-Yogurt</p> <span class="label label-success label-as-badge">  </span></a> </li>
-
-                 <li class="nav-item"><a href="{{asset('approved/51')}}" class="nav-link"> <p>51-Milk-whole </p><span class="label label-success label-as-badge">  </span></a> </li>
-                 <li class="nav-item"><a href="{{asset('approved/52')}}" class="nav-link"><p>52-Milk Low Fat/fat free</p> <span class="label label-success label-as-badge">  </span> </a> </li>
-                 <li class="nav-item"><a href="{{asset('approved/53')}}" class="nav-link"><p>53-Frozen Juice </p><span class="label label-success label-as-badge">  </span> </a> </li>
-                 <li class="nav-item"><a href="{{asset('approved/54')}}" class="nav-link"><p>54-Juice-64oz</p> <span class="label label-success label-as-badge">  </span> </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/51')}}" class="nav-link"> <p>51-Milk-whole <span class="badge badge-success right">{{$c_a51}} </span> </p> </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/52')}}" class="nav-link"><p>52-Milk Low Fat/fat free<span class="badge badge-success right">{{$c_a52}} </span> </p>   </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/53')}}" class="nav-link"><p>53-Frozen Juice <span class="badge badge-success right">{{$c_a53}} </span> </p>  </a> </li>
+                 <li class="nav-item"><a href="{{asset('approved/54')}}" class="nav-link"><p>54-Juice-64oz <span class="badge badge-success right">{{$c_a54}} </span> </p>   </a> </li>
 
 
 
@@ -194,7 +226,7 @@ font-size: 13px;
               <p>
                 Pending
 
-                <span class="badge badge-info right">6</span>
+              <span class="badge badge-warning right">{{$c_pending}}</span>
               </p>
             </a>
 
@@ -214,7 +246,7 @@ font-size: 13px;
                 <i class="nav-icon fas fa-thumbs-down"></i>
               <p>
                 Denied
-
+              <span class="badge badge-danger right">{{$c_denied}}</span>
               </p>
             </a>
 
@@ -256,6 +288,33 @@ font-size: 13px;
 
 
           </li>
+
+
+
+
+
+
+
+
+          <li class="nav-item has-treeview">
+            <a href="{{route('recent_edit')}}" class="nav-link @if( $segment == 'recent_edit') active @endif">
+                <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Recent Edits
+
+              </p>
+            </a>
+
+          </li>
+
+
+
+
+
+
+
+
+
 
 
         </ul>
