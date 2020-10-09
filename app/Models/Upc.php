@@ -22,12 +22,5 @@ protected $table = 'apl_upc';
     }
 
 
-    public function news()
-    {
 
-
-        return $this->hasMany('App\Models\News');
-        //return $this->belongsTo(Staff::class,'verify_staff','no');
-
-    }
 }

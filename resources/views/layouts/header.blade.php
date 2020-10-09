@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -110,11 +111,9 @@ $c_a54 = App\Models\Upc::where('verify',1)->where('category',54)->count() ;
           </div> --}}
 
 
-{{--  --}}
 
 @include('layouts.avarta-icon')
 
-{{--  --}}
 
 
 
@@ -148,14 +147,21 @@ $c_a54 = App\Models\Upc::where('verify',1)->where('category',54)->count() ;
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+
+
+
+
         <div class="image">
           {{-- <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"> --}}
           <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
         </div>
+
         <div class="info">
           <a href="#" class="d-block">{{ Auth::user()->name }}</a>
         </div>
-      </div>
+
+
+    </div>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -166,13 +172,15 @@ $c_a54 = App\Models\Upc::where('verify',1)->where('category',54)->count() ;
               <? $segment = Request::segment(1);?>
 
                <li class="nav-header">UPC/PLU</li>
+
           <li class="nav-item has-treeview  @if( $segment == 'approved') menu-open @endif  ">
             <a href="#" class="nav-link @if( $segment == 'approved') active @endif ">
+
               <i class="nav-icon fas fa-thumbs-up"></i>
               <p>
-                Approved
+                Approved  <i class="fas fa-angle-left right"></i>
+<span class="badge badge-success right">{{$c_approved}}</span>
 
-                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
 
@@ -181,7 +189,7 @@ $c_a54 = App\Models\Upc::where('verify',1)->where('category',54)->count() ;
 
 
 
-            <li class="nav-item"><a href="{{route('approved')}}" class="nav-link">  <p>All <span class="badge badge-success right">{{$c_approved}} </span> </p>  </a> </li>
+            <li class="nav-item "><a href="{{route('approved')}}" class="nav-link">  <p>All <span class="badge badge-success right">{{$c_approved}} </span> </p>  </a> </li>
                <li class="nav-item"><a href="{{asset('approved/2')}}" class="nav-link"><p>02-Cheese or Tofu<span class="badge badge-success right">{{$c_a2}} </span> </p>  </a> </li>
                  <li class="nav-item"><a href="{{asset('approved/3')}}" class="nav-link"><p>03-Eggs <span class="badge badge-success right">{{$c_a3}} </span> </p>  </a> </li>
                  <li class="nav-item"><a href="{{asset('approved/5')}}" class="nav-link"><p>05-Breakfast Cereal <span class="badge badge-success right">{{$c_a5}} </span> </p>  </a> </li>

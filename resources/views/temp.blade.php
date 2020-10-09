@@ -14,11 +14,100 @@
 
 @section('content')
 
+<? $segment = Request::segment(1);?>
+
+<div class="px-3  py-2">
 
 
+@if($segment == 'approved')
+<div class="px-10 py-4  text-3xl inline"  > <i class="nav-icon fas fa-thumbs-up text-3xl" ></i> Approved </div>
+@endif
+@if($segment == 'pending' or $segment == 'pending_cate')
+<div class="px-10 py-4  text-3xl inline"  > <i class="nav-icon fas fa-flag text-3xl" ></i> Pending </div>
+@endif
+@if($segment == 'denied')
+<div class="px-10 py-4  text-3xl inline"  > <i class="nav-icon fas fa-thumbs-down text-3xl" ></i> Denied </div>
+@endif
+
+@if($segment == 'recent_edit')
+<div class="px-10 py-4  text-3xl inline"  > <i class="nav-icon fas fa-edit text-3xl" ></i> Recent Edits </div>
+@endif
+
+
+<? $segment2 = Request::segment(2);?>
+
+
+@if($segment2 == 2)<div class="px-10 py-4  text-2xl inline "  >02-Cheese or Tofu</div>@endif
+@if($segment2 == 3)<div class="px-10 py-4  text-2xl inline"  > 03-Eggs  </div>@endif
+@if($segment2 == 5)<div class="px-10 py-4  text-2xl inline"  >05-Breakfast Cereal </div>@endif
+@if($segment2 == 6)<div class="px-10 py-4  text-2xl inline"  >06-Legumes  </div>@endif
+@if($segment2 == 8)<div class="px-10 py-4  text-2xl inline"  >08-Fish </div>@endif
+@if($segment2 == 9)<div class="px-10 py-4  text-2xl inline"  > 09-Infant Cereal </div>@endif
+@if($segment2 == 12)<div class="px-10 py-4  text-2xl inline"  >  12-Infant Fruits & Vegetables </div>@endif
+@if($segment2 == 13)<div class="px-10 py-4  text-2xl inline"  > 13-Infant Meats  </div>@endif
+@if($segment2 == 16)<div class="px-10 py-4  text-2xl inline"  > 16-Bread/Whole Grains  </div>@endif
+@if($segment2 == 19)<div class="px-10 py-4  text-2xl inline"  > 19-Fruit & Vegetables Cash Value  </div>@endif
+@if($segment2 == 21)<div class="px-10 py-4  text-2xl inline"  > 21-Infant Formula(IF)  </div>@endif
+@if($segment2 == 31)<div class="px-10 py-4  text-2xl inline"  > 31-Exempt Infant Formula(EXF) </div>@endif
+@if($segment2 == 41)<div class="px-10 py-4  text-2xl inline"  > 41-WIC Eligible Nutritionals  </div>@endif
+@if($segment2 == 50)<div class="px-10 py-4  text-2xl inline"  > 50-Yogurt   </div>@endif
+@if($segment2 == 51)<div class="px-10 py-4  text-2xl inline"  > 51-Milk-whole   </div>@endif
+@if($segment2 == 52)<div class="px-10 py-4  text-2xl inline"  > 52-Milk Low Fat/fat free  </div>@endif
+@if($segment2 == 53)<div class="px-10 py-4  text-2xl inline"  > 53-Frozen Juice  </div>@endif
+@if($segment2 == 54)<div class="px-10 py-4  text-2xl inline"  > 54-Juice-64oz  </div>@endif
+
+
+
+<div class="px-10 py-4   inline    ">
+
+<div class="float-right mx-10 text-red-700 text-xl " >
+{{$upcs->total()}}
+</div>
+
+</div>
+
+
+@if($segment == 'approved')
+<div class="px-10 py-4   inline">
+
+@include('layouts.sub_btn')
+
+</div>
+
+@endif
+ 
+{{-- @if($segment == 'denied')
+
+
+<div class="px-10 py-4   inline">
+
+@include('layouts.sub_select_denied')
+
+</div>
+@endif --}}
+
+{{$cate}}
+{{-- 
+@if($segment == 'pending')
+
+
+<div class="px-10 py-4   inline">
+
+@include('layouts.sub_select_pending')
+
+</div>
+
+@endif  --}}
+
+
+</div>
 
 
 <div class="px-3 py-4 flex justify-center">
+
+
+
+
 
     <table class="w-full text-md bg-white shadow-md rounded mb-4">
 
@@ -40,7 +129,7 @@
             <th class="text-left p-1 px-1">Size</th>
             <th class="text-left p-1 px-1">UOM</th>
 
-            <th class="text-left p-1 px-1" width=10%>Actions</th>
+            <th class="text-left p-1 px-1" width=15%>Actions</th>
 
             </tr>
         </thead>
@@ -88,17 +177,28 @@ $nu = optional($nu->getIngre);
 
         <form action="upc_new_digiteye.php" target="_blank">
 
-        <td class="p-1 px-1"> <input type=hidden name=upcCode value="{{$c->upc}}"></input> <button class="btn btn-default btn-sm"  type=submit data-toggle="tooltip"
+        <td class="p-1 px-1"> <input type=hidden name=upcCode value="{{$c->upc}}"></input> <button class="btn btn-default btn-sm  "  type=submit data-toggle="tooltip"
         title="See more details of the item.">
         <span class="fa fa-search" ></span></button>
         </form>
 
-        <a href=sw_iamdone.php?no={{$c->id}}>      <span class="fa fa-thumbs-o-up" data-toggle="tooltip" title="WIC approved item" style="font-size:20px;"></span>   </a>
-        <a href=sw_iamdoneback.php?no={{$c->id}}>    <span class="fa fa-thumbs-o-down" data-toggle="tooltip" title="It is NOT WIC approved." style="font-size:20px;"></span>   </a>
-        <a href=sw_iamdone_pending.php?no={{$c->id}}>    <span class="fa fa-flag" data-toggle="tooltip" title="Pending!" style="font-size:20px;"></span>   </a>
+        <a href="{{route('make_approved', ['id'=>$c->id])}}">  <button class="btn btn-default btn-sm  " >    <span class="fa fa-thumbs-up" data-toggle="tooltip" title="WIC approved item"  ></span>  </button> </a>
+  <!--     <a href="{{route('make_denied', ['id'=>$c->id])}}">  <button class="btn btn-default btn-sm  " >    <span class="fa fa-thumbs-down" data-toggle="tooltip" title="It is NOT WIC approved."  ></span>  </button>   </a>
+  -->
+        <a href="#">  <button class="btn btn-default btn-sm  " ><span class="fa fa-thumbs-down" data-toggle="modal" data-target="#denied{{$c->id}}" title="Edit!"   ></span></button></a>
 
 
-        <span class="fa fa-pencil-square-o"  data-toggle="modal" data-target="#edit" title="Edit" style="font-size:20px;"></span>
+
+
+        <a href="{{route('make_pending', ['id'=>$c->id])}}">  <button class="btn btn-default btn-sm  " >    <span class="fa fa-flag" data-toggle="tooltip" title="Pending!"  ></span>  </button>   </a>
+
+
+        <a href="#">  <button class="btn btn-default btn-sm  " ><span class="fa fa-edit" data-toggle="modal" data-target="#edit{{$c->id}}" title="Edit!"   ></span></button></a>
+
+
+
+
+
 
         </td>
 
@@ -107,7 +207,7 @@ $nu = optional($nu->getIngre);
 
         <tr class="border-b hover:bg-orange-100 bg-gray-100 align-top">
 
-        <td style="border-top:none;" ><img src="{{$c->image}}" width=150px></td>
+        <td style="border-top:none;" ><img src="{{$c->image}}" class="shadow rounded max-w-full h-auto align-middle border-none"></td>
         <td class="p-1 px-1"colspan=5>Ingredients : {{$nu->ingredients}}
         <div style="padding-top:20px;">Source : {{$c->add_source}}_{{$c->add_source_desc}}</div>
         <div style="padding-top:0px;">Long Description : {{$c->long_desc}}</div>
@@ -132,7 +232,13 @@ $nu = optional($nu->getIngre);
 
         </tr>
 
+        @include('layouts.modal', $c)
+
+        @include('layouts.modal_confirm', $c)
+
         @endforeach
+
+
 
 </table>
 
@@ -144,6 +250,8 @@ $nu = optional($nu->getIngre);
 
 {{ $upcs->links() }}
 </div>
+
+
 
 
 @endsection

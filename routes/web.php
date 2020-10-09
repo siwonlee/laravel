@@ -40,9 +40,20 @@ Route::get('/temp', function () {
 
 Route::get('/approved', 'UpcController@approved')->name('approved');
 Route::get('/approved/{cate}', 'UpcController@approved_cate')->name('approved_cate');
+Route::get('/approved/{cate}/{sub}', 'UpcController@approved_sub')->name('approved_sub');
+Route::get('/make_approved/{id}', 'UpcController@make_approved')->name('make_approved');
+
 Route::get('/denied', 'UpcController@denied')->name('denied');
+Route::post('/denied/{id}', 'UpcController@make_denied')->name('make_denied');
+
 Route::get('/pending', 'UpcController@pending')->name('pending');
+Route::get('/make_pending/{id}', 'UpcController@make_pending')->name('make_pending');
+Route::get('/pending_cate', 'UpcController@pending_cate')->name('pending_cate');
+
 Route::get('/recent_edit', 'UpcController@recent_edit')->name('recent_edit');
+
+
+
 
 
 Route::get('/t', function () {
