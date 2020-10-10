@@ -1,279 +1,174 @@
-  <!-- Modal -->
-{{-- <div class="modal fade" id="edit{{$c->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> --}}
-
-
-
+ 
 
      <!-- Modal -->
   <div class="modal fade" id="edit{{$c->id}}" role="dialog">
     <div class="modal-dialog">
 
 			  <!-- Modal content-->
-			  <div class="modal-content">
-						<div class="modal-header" >
-						  <button type="button" class="close" data-dismiss="modal">&times;</button>
-
-						</div>
-				<div class="modal-body">
-		 <p>
-
-		<style>
-
-		.fileUpload {
-    position: relative;
-    overflow: hidden;
-	display:inline;
-
-}
-.fileUpload input.upload {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 0;
-    padding: 0;
-
-    cursor: pointer;
-    opacity: 0;
-    filter: alpha(opacity=0);
-}
-
-
-
-
-		</style>
-
-	    <form action="upload_img.php" method="post" enctype="multipart/form-data" class="form-inline">
-
-			<div class="form-group row">
-	<div class="control-label col-md-3 col-sm-3 col-xs-3" ></div>
-
-
-
-			<div class="col-md-9 col-sm-9 col-xs-9">
-
-
-<div class="fileUpload btn btn-primary">
-    <span>Browse</span>
-    <input id="uploadBtn" type="file" class="upload" name="fileToUpload"   />
-</div>
-	<div class="fileUpload btn btn-danger">
-    <span>submit</span>
-    <input type="submit"    class="upload" />
-</div>
-
-     		<input id="uploadFile" placeholder="Choose File" class="fileUpload" disabled="disabled" />
-
-
-
-
-			</div>
-
+		  <div class="modal-content">
+		  	<div class="modal-header" >
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 
 
-
-</form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		 <form action="sw_upc_edit.php"  id="modal-form-sw">
-			   <input name = "no" class="form-control" type=hidden value="{{$c->no}}"  ></input>
-			 <!-- <input name = "upc" class="form-control" type=hidden value="{{$c->upc}}"  ></input> -->
-
-
-
-
-
-
-
-
-
-
+			<div class="modal-body">
+	 
+ 		
+			
+					<form action="sw_upc_edit.php"  id="modal-form-sw">
+						<input name = "no" class="form-control" type=hidden value="{{$c->id}}"  ></input>
+				                <input name = "staff" class="form-control  "  type=hidden value="{{Auth::user()->name}} "   ></input>
+				<input name = "upc" class="form-control  "  type=hidden value="{{$c->upc}} "   ></input>
+	   @csrf
+	
 			<div class="form-group row">
-			<label class="control-label col-md-3 col-sm-3 col-xs-3" for="image">Image
-
-
-			</label>
-
-
+  			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> Image </label>
 			<div class="col-md-9 col-sm-9 col-xs-9">
-			<input name = "image" class="form-control col-md-9 col-sm-9 col-xs-9"  type=text value="{{$c->image}}"  ></input>
-			</div>
-
-			</div>
-
-<!--
+  			<input name = "comment" class="form-control  "  type=text value=" {{$c->image}}"   ></input>
+			</div> </div> 
 			<div class="form-group row">
-			<label class="control-label col-md-3 col-sm-3 col-xs-3" for="image">Image2
+  			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> Status </label>
+			<div class="col-md-9 col-sm-9 col-xs-9">
+  			<input name = "comment" class="form-control  "  type=text value="{{$c->approved}} " readonly  ></input>
+			</div> </div> 
+			<div class="form-group row">
+  			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> Staff </label>
+			<div class="col-md-9 col-sm-9 col-xs-9">
+  			<input name = "comment" class="form-control  "  type=text value="{{$c->verify_staff}} " readonly  ></input>
+			</div> </div> 
+			<div class="form-group row">
+  			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> UPC </label>
+			<div class="col-md-9 col-sm-9 col-xs-9">
+  			<input name = "comment" class="form-control  "  type=text value="{{$c->upc}} "  readonly ></input>
+			</div> </div> 
+		 
+			<div class="form-group row">
+			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> Category </label>
+			 
+			<div class="col-md-9 col-sm-9 col-xs-9">
+  			<input name = "comment" class="form-control  "  type=text value=" {{$c->category}} "    ></input>
+			</div> </div> 
+			<div class="form-group row">
+			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> Subcategory </label>
+			<div class="col-md-9 col-sm-9 col-xs-9">
+  			<input name = "comment" class="form-control  "  type=text value=" {{$c->subcategory}} "    ></input>
+			</div> </div> 
+			<div class="form-group row">
+			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc">Brand  </label>
+			<div class="col-md-9 col-sm-9 col-xs-9">
+  			<input name = "comment" class="form-control  "  type=text value=" {{$c->brand}} "    ></input>
+			</div> </div> 
+			<div class="form-group row">
+						<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> description </label>
+			<div class="col-md-9 col-sm-9 col-xs-9">
+  			<input name = "comment" class="form-control  "  type=text value="{{$c->description}}  "    ></input>
+			</div> </div> 
+			<div class="form-group row">
+						<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc">Short Description  </label>
+			<div class="col-md-9 col-sm-9 col-xs-9">
+  			<input name = "comment" class="form-control  "  type=text value=" {{$c->short_desc}}  "    ></input>
+			</div> </div> 
+			<div class="form-group row">
+						<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc">size  </label>
+			<div class="col-md-9 col-sm-9 col-xs-9">
+  			<input name = "comment" class="form-control  "  type=text value=" {{$c->size}}"    ></input>
+			</div> </div> 
+			<div class="form-group row">
+			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> UOM </label>
+			<div class="col-md-9 col-sm-9 col-xs-9">
+  			<input name = "comment" class="form-control  "  type=text value=" {{$c->uom}} "    ></input>
+			</div> </div> 
+			<div class="form-group row">
+			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> High Cost Item </label>
+			<div class="col-md-9 col-sm-9 col-xs-9">
+			<select   class="col-md-12 col-sm-12 col-xs-12 form-control"    name=high_cost  ; "    >
+
+				<option value="0" <?if($c->high_cost==0){echo 'selected';}?> >NO HC</option>
+				<option value="1" <?if($c->high_cost==1){echo 'selected';}?> >HC</option>
 
 
+			</select>
+  		 
+			</div> </div> 
 
+						<div class="form-group row">
+			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> ingredients </label>
+			<div class="col-md-9 col-sm-9 col-xs-9">
+  	<textarea  name = "ingredients" style="height:100px;"  class="form-control col-md-12 col-sm-12 col-xs-12"  >{{$nu->ingredients}}</textarea> 
+			</div> </div> 
 
-			</label>
+						<div class="form-group row">
+			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> Nutrition </label>
+			<div class="col-md-9 col-sm-9 col-xs-9">
+ 	<textarea name = "nutrition" style="height:100px;"  class=" form-control col-md-12 col-sm-12 col-xs-12"   >{{$nu->nutrition}}</textarea> 
+			</div> </div> 
 
-
+						<div class="form-group row">
+			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> Benefit QT  </label>
+			<div class="col-md-9 col-sm-9 col-xs-9">
+  			<input name = "comment" class="form-control  "  type=text value=" {{$c->benefit_qt}} "    ></input>
+			</div> </div> 	 
+ 						<div class="form-group row">
+			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc">UOM for WOW  </label>
 			<div class="col-md-9 col-sm-9 col-xs-9">
 
-			 			<form   action="upload_img.php" method="post" enctype="multipart/form-data"  >
 
-        <input class="btn btn-xs" type="file" name="fileToUpload" id="fileToUpload" style="display:inline;"></input><input class="btn btn-xs" type="submit" value="Upload Image" name="submit"></input>
-
-</form>
+			<select   class="col-md-12 col-sm-12 col-xs-12 form-control"    name=UOM  ; "    >
 
 
 
-			</div>
+			<option value="BAG" <?if($c->high_cost=='BAG'){echo 'selected';}?> >BAG_BAG</option>
 
-			</div>
+ 
+			<option value="CAN" <?if($c->high_cost=='CAN'){echo 'selected';}?> >CAN_CAN</option> 
+			<option value="CTR" <?if($c->high_cost=='CTR'){echo 'selected';}?> >CTR_CONTAINER</option>
 
--->
-			<div class="form-group row">
-			<label class="control-label col-md-3 col-sm-3 col-xs-3"for="a1">Status</label>
+			<option value="DOZ" <?if($c->high_cost=='DOZ'){echo 'selected';}?> >DOZ_DOZEN</option>
+
+			<option value="GAL" <?if($c->high_cost=='GAL'){echo 'selected';}?> >GAL_GALLON</option>
+			<option value="HGL" <?if($c->high_cost=='HGL'){echo 'selected';}?> >HGL_HALF GALLON</option>
+ 
+			<option value="LB" <?if($c->high_cost=='LB'){echo 'selected';}?> >LB_POUND</option>
+
+			<option value="OZ" <?if($c->high_cost=='OZ'){echo 'selected';}?> >OZ_OZ</option>
+			<option value="PKG" <?if($c->high_cost=='PKG'){echo 'selected';}?> >PKG_PACKAGE</option>
+
+			<option value="QT" <?if($c->high_cost=='QT'){echo 'selected';}?> >QT_QUART</option>
+			<option value="4PK" <?if($c->high_cost=='4PK'){echo 'selected';}?> >4PK_4 PACKAGES</option>
+			<option value="6PK" <?if($c->high_cost=='6PK'){echo 'selected';}?> >6PK_6 PACKAGES</option>
+
+			<option value="$$$" <?if($c->high_cost=='$$$'){echo 'selected';}?> >$$$_DOLLAR</option>
+
+
+
+ 
+			</select>
+
+ 
+
+ 
+			</div> </div> 	 
+  						<div class="form-group row">
+			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> Comment </label>
 			<div class="col-md-9 col-sm-9 col-xs-9">
-			<input name="a1"class="form-control col-md-9 col-sm-9 col-xs-9"  value="{{$c->approved}}" type=text readonly></input>
-			</div></div>
+  			<input name = "comment" class="form-control  "  type=text value="{{$c->comment}}  "    ></input>
+			</div> </div> 	 
+ 
 
-			<div class="form-group row">
-			<label class="control-label col-md-3 col-sm-3 col-xs-3" for="a2">Staff</label>
-			<div class="col-md-9 col-sm-9 col-xs-9"><input name="a2"class="form-control col-md-9 col-sm-9 col-xs-9"  value="{{$c->verify_staff}}"type=text readonly></input>
-			</div></div>
+ 
+ 
+ 
 
-			<div class="form-group row">
-			<label class="control-label col-md-3 col-sm-3 col-xs-3" for="upc">UPC</label>
-			<div class="col-md-9 col-sm-9 col-xs-9"><input name = "upc" class="form-control col-md-9 col-sm-9 col-xs-9"  type=text value="{{$c->upc}}" readonly></input>
-			</div></div>
-
+									<div align=center style="margin-top:10px;">
+									<button class="btn btn-success btn-sm"  type=submit >Submit</button>
+									</div>
 
 
-			<div class="form-group row">
-			<label class="control-label col-md-3 col-sm-3 col-xs-3" for="category">Category</label>
-			<div class="col-md-9 col-sm-9 col-xs-9"><input name = "category" class="form-control col-md-9 col-sm-9 col-xs-9"  type=text value="{{$c->category}}"  ></input>
-			</div></div>
-
-			<div class="form-group row">
-			<label class="control-label col-md-3 col-sm-3 col-xs-3" for="subcategory"> Subcategory</label>
-			<div class="col-md-9 col-sm-9 col-xs-9">
-			<input name = "subcategory" class="form-control col-md-9 col-sm-9 col-xs-9"    type=text value="{{$c->subcategory}}"  ></input>
-			</div></div>
-
-			<div class="form-group row">
-			<label class="control-label col-md-3 col-sm-3 col-xs-3" for="brand">Brand</label>
-			<div class="col-md-9 col-sm-9 col-xs-9">
-			<input name = "brand" class="form-control col-md-9 col-sm-9 col-xs-9"  type=text value="{{$c->brand}}"></input>
-			</div></div>
+					</form>
 
 
-
-
-			<div class="form-group row">
-			<label class="control-label col-md-3 col-sm-3 col-xs-3" for="description"> description</label>
-			<div class="col-md-9 col-sm-9 col-xs-9">
-			<input name = "description" class="form-control col-md-9 col-sm-9 col-xs-9"  type=text value="{{$c->description}}" ></input>
-			</div></div>
-<!--
-			<div class="form-group row">
-			<label class="control-label col-md-3 col-sm-3 col-xs-3" for="long_desc"> Long Description</label>
-			<div class="col-md-9 col-sm-9 col-xs-9">-->
-			<input name = "long_desc" class="form-control col-md-9 col-sm-9 col-xs-9"  type=hidden value="{{$c->long_desc}}" ></input>
-<!--			</div></div>
--->
-			<div class="form-group row">
-			<label class="control-label col-md-3 col-sm-3 col-xs-3" for="short_desc"> Short Description</label>
-			<div class="col-md-9 col-sm-9 col-xs-9">
-			<input name = "short_desc" class="form-control col-md-9 col-sm-9 col-xs-9"  type=text value="{{$c->short_desc}}" id="input-1" ></input>
-			</div></div>
-
-			<div class="form-group row">
-			<label class="control-label col-md-3 col-sm-3 col-xs-3" for="size"> size</label>
-			<div class="col-md-9 col-sm-9 col-xs-9">
-			<input name = "size" class="form-control col-md-9 col-sm-9 col-xs-9"  type=text value="{{$c->size}}" size=2></input>
-			 </div></div>
-
-			<div class="form-group row">
-			<label class="control-label col-md-3 col-sm-3 col-xs-3" for="uom"> UOM</label>
-			<div class="col-md-9 col-sm-9 col-xs-9">
-			<input name = "uom" class="form-control col-md-9 col-sm-9 col-xs-9"  type=text value="{{$c->uom}}" size=2></input>
-			</div></div>
-
-			<div class="form-group row">
-			<label class="control-label col-md-3 col-sm-3 col-xs-3" for="high_cost"> High Cost Item</label>
-			<div class="col-md-9 col-sm-9 col-xs-9">
-					 <select   class="form-control col-md-9 col-sm-9 col-xs-9"   name=high_cost style="font-size:13px; font-family:FontAwesome; "    >
-
-							<option value="0" <?if($c->high_cost==0){echo 'selected';}?> >NO HC</option>
-							<option value="1" <?if($c->high_cost==1){echo 'selected';}?> >HC</option>
-
-
-								 </select>
-							 </div> </div>
-
-
-			<div class="form-group row">
-			<label class="control-label col-md-3 col-sm-3 col-xs-3" for="ingredients"> ingredients</label>
-			<div class="col-md-9 col-sm-9 col-xs-9">
-			<textarea  name = "ingredients" style="height:100px;" class="form-control col-md-9 col-sm-9 col-xs-9"   >{{$c->ingredients}}</textarea>
-			</div></div>
-
-			 <div class="form-group row">
-			 <label class="control-label col-md-3 col-sm-3 col-xs-3" for="nutrition"> Nutrition</label>
-			 <div class="col-md-9 col-sm-9 col-xs-9">
-			 <textarea name = "nutrition" style="height:100px;"class="form-control col-md-9 col-sm-9 col-xs-9"    >{{$c->nutrition}}</textarea>
-			 </div> </div>
-
-			<div class="form-group row">
-			<label class="control-label col-md-3 col-sm-3 col-xs-3" for="benefit_qt"> Benefit QT</label>
-			  <div class="col-md-9 col-sm-9 col-xs-9">
-			<input name = "benefit_qt" class="form-control col-md-9 col-sm-9 col-xs-9"  type=text value="{{$c->benefit_qt}}"  ></input>
-			</div></div>
-
-			<div class="form-group row">
-			<label class="control-label col-md-3 col-sm-3 col-xs-3" for="benefit_uom_wow"> UOM for WOW</label>
-			   <div class="col-md-9 col-sm-9 col-xs-9">
-			<input name = "benefit_uom_wow" class="form-control col-md-9 col-sm-9 col-xs-9"  type=text value="{{$c->benefit_uom_wow}}" placeholder="Benefit UOM"  ></input>
-			 <small>JBG,BAG,CBL,OZ,DOZ,GAL,QT,HGL,LB,$$$,CAN,PKG,BAG,CTR only </small>
-			 </div></div>
-
-
-			<div class="form-group row">
-			  <label class="control-label col-md-3 col-sm-3 col-xs-3" for="comment"> Comment</label>
-			   <div class="col-md-9 col-sm-9 col-xs-9">
-			  <input name = "comment" class="form-control col-md-9 col-sm-9 col-xs-9"  type=text value="{{$c->comment}}"></input>
-			</div></div>
-
-
-						<div align=center style="margin-top:10px;">
-						 <button class="btn btn-success btn-sm"  type=submit >Submit</button>
-						 </div>
-
-
-						</form>
-
-
-
-
-
-
-
-
-		</p>
+ 
+ 
 				</div>
 
 				<div class="modal-footer">
@@ -282,6 +177,7 @@
 
 
 			  </div>
+
 
     </div>
   </div>
@@ -292,6 +188,4 @@
 
 
 
-
-
-</div>
+ 

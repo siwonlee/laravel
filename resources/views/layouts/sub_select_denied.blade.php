@@ -1,4 +1,4 @@
- <?
+  <?
  
 if(request()->cate){
 
@@ -12,7 +12,7 @@ $cate=1;
 
 			 	 <div class="float-right "  >
 		
-					<form class="form-signin form-inline"  action="{{route('pending_cate',['cate' => $cate ])}}" method="get" >
+					<form class="form-signin form-inline"  action="{{route('denied_cate',['cate' => $cate ])}}" method="get" >
 			 
 							<select   class="form-control"   name=cate style="font-size:13px; "    >
 								<option selected   >Choose one </option>  

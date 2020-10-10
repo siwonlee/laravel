@@ -39,6 +39,8 @@
 			<div class="col-md-9 col-sm-9 col-xs-9">
             <input name = "time" class="form-control  "  type=hidden value=" {{Carbon::now()->format('Y-m-d')}}"   ></input>
                 <input name = "staff" class="form-control  "  type=hidden value="{{Auth::user()->name}} "   ></input>
+				<input name = "upc" class="form-control  "  type=hidden value="{{$c->upc}} "   ></input>
+				
 			<input name = "comment" class="form-control  "  type=text value=" "   ></input>
 			</div></div>
 

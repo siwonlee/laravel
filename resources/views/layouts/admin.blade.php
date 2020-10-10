@@ -1,6 +1,6 @@
 @include('layouts.header')
 
-@include('layouts.message')
+{{-- @include('layouts.message') --}}
 @yield('content')
 
 

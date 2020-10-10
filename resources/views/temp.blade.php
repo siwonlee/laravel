@@ -4,8 +4,8 @@
 // $upcs = App\Models\Upc::where('verify', 2)
 // ->paginate(10)    ;
 
-
-
+//$cate = $_GET['cate'];
+ 
 
 ?>
 
@@ -60,51 +60,55 @@
 
 <div class="px-10 py-4   inline    ">
 
-<div class="float-right mx-10 text-red-700 text-xl " >
-{{$upcs->total()}}
-</div>
+        <div class="float-right mx-10 text-red-700 text-xl " >
+        {{$upcs->total()}}
+        </div>
 
 </div>
 
 
 @if($segment == 'approved')
-<div class="px-10 py-4   inline">
+    <div class="px-10 py-4   inline">
 
-@include('layouts.sub_btn')
+    @include('layouts.sub_btn')
 
-</div>
+    </div>
 
 @endif
  
-{{-- @if($segment == 'denied')
+@if($segment == 'denied' or $segment == 'denied_cate')
 
 
-<div class="px-10 py-4   inline">
+    <div class="px-10 py-4   inline">
 
-@include('layouts.sub_select_denied')
+    @include('layouts.sub_select_denied')
+
+    </div>
+
+@endif
+
+ 
+
+@if($segment == 'pending' or $segment == 'pending_cate')
+
+ 
+    <div class="px-10 py-4   inline">
+
+    @include('layouts.sub_select_pending')
+
+    </div>
+
+@endif 
+
 
 </div>
-@endif --}}
-
-{{$cate}}
-{{-- 
-@if($segment == 'pending')
 
 
-<div class="px-10 py-4   inline">
-
-@include('layouts.sub_select_pending')
-
-</div>
-
-@endif  --}}
 
 
-</div>
 
 
-<div class="px-3 py-4 flex justify-center">
-
+<div class="px-3 py-4 ">
 
 
 

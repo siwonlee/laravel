@@ -45,6 +45,7 @@ Route::get('/make_approved/{id}', 'UpcController@make_approved')->name('make_app
 
 Route::get('/denied', 'UpcController@denied')->name('denied');
 Route::post('/denied/{id}', 'UpcController@make_denied')->name('make_denied');
+Route::get('/denied_cate', 'UpcController@denied_cate')->name('denied_cate');
 
 Route::get('/pending', 'UpcController@pending')->name('pending');
 Route::get('/make_pending/{id}', 'UpcController@make_pending')->name('make_pending');

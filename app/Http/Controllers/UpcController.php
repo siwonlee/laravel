@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Upc;
+use Carbon\Carbon;
+use Auth;
 
-
+ 
 class UpcController extends Controller
 {
+
 
 
 
@@ -15,6 +18,9 @@ class UpcController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    
+
+
     }
 
     /**
@@ -50,19 +56,20 @@ class UpcController extends Controller
     }
     public function pending_cate(Request $request)
     {
-    
-       
-    
-            $cate = $request->input('cate');
-    
-    
-        //$this->cate = $cate;
+        $cate = $request->input('cate');
         $upcs['upcs'] = Upc::where('verify', 2) -> where('category', $cate)->orderby('verify_date','desc')->paginate(10) ;
+        return view('temp')->with($upcs);
+     }
 
-        return view('temp')->with($upcs,$cate);
-        //return $arr;
+     public function denied_cate(Request $request)
+     {
+         $cate = $request->input('cate');
+         $upcs['upcs'] = Upc::where('verify', 3) -> where('category', $cate)->orderby('verify_date','desc')->paginate(10) ;
+         return view('temp')->with($upcs);
+      }
+ 
 
-    }
+
 
     public function approved_sub($cate,$sub)
     {
@@ -122,7 +129,7 @@ class UpcController extends Controller
         $comment = $request->input('comment');
         $time = $request->input('time');
         $staff = $request->input('staff');
-
+        $upc = $request->input('upc');
 
         Upc::where('id', $id)
               ->update([
@@ -135,7 +142,7 @@ class UpcController extends Controller
                  'edit_staff'=>$staff,
                  ]);
 
-              return redirect()->back()->with('deny','The item has been denied.');
+              return redirect()->back()->with('deny','The item( '.$upc.' ) has been denied.');
 
         //return $arr;
 
@@ -143,11 +150,26 @@ class UpcController extends Controller
 
   public function make_approved($id)
     {
+        $time = Carbon::now()->format('Y-m-d');
+        $staff = Auth::user()->name;
+        $upc = Upc::find($id)->upc;
         Upc::where('id', $id)
-              ->update(['verify' => 1,'approved'=>'Yes']);
+              ->update([
+                  'verify' => 1,
+                  'approved'=>'Yes',
+ 
+                  'verify_date'=>$time,
+                  'verify_staff'=>$staff,
+ 
+                  'edit_staff'=>$staff                
+                  
+                  
+                  
+                  
+                  ]);
 
-              return redirect()->back()->with('approved','The item has been approved.');;
-
+              return redirect()->back()->with('approved','The item( '.$upc.' ) has been approved.');;
+ 
         //return $arr;
 
     }

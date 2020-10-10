@@ -9,7 +9,7 @@
 
 @if(session('deny') )
 
-<div class="mx-3 my-4 alert alert-danger  ">
+<div class="  alert alert-danger  ">
 
     {{session('deny')}}
 
@@ -19,7 +19,7 @@
 
 @if(session('approved') )
 
-<div class="alert alert-success mx-3 my-4">
+<div class="alert alert-success   ">
     {{session('approved')}}
 </div>
 
@@ -27,7 +27,7 @@
 
 @if(session('pending') )
 
-<div class="alert alert-warning mx-3 my-4">
+<div class="alert alert-warning  ">
     {{session('pending')}}
 </div>
 

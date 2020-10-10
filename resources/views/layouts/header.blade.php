@@ -76,7 +76,10 @@ $c_a54 = App\Models\Upc::where('verify',1)->where('category',54)->count() ;
 
 
 ?>
+<?use Carbon\Carbon;
+$time = Carbon::now()->format('Y-m-d');
 
+?>
 
 
     </head>
@@ -94,7 +97,19 @@ $c_a54 = App\Models\Upc::where('verify',1)->where('category',54)->count() ;
 
     </ul>
 
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link"  > 
+        
+        
+        
+        @include('layouts.message')
+        
+        </a>
+      </li>
 
+
+    </ul>
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
