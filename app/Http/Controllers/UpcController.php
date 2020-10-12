@@ -174,6 +174,230 @@ class UpcController extends Controller
 
     }
 
+
+    public function edit(Request $request, $id)
+    {
+ 
+        $time = $request->input('time');
+        $staff = $request->input('staff');
+        $verify = $request->input('verify');     
+        $upc = $request->input('upc');          
+        
+
+        $image = $request->input('image');        
+        $approved = $request->input('approved');
+        $verify_staff = $request->input('verify_staff');
+ 
+        $category = $request->input('category');
+        $subcategory = $request->input('subcategory');
+        $brand = $request->input('brand');
+        $description = $request->input('description');
+        $short_desc = $request->input('short_desc');
+        $size = $request->input('size');
+        $uom = $request->input('uom');
+        $high_cost = $request->input('high_cost');
+        $ingredients = $request->input('ingredients');
+        $benefit_uom = $request->input('benefit_uom');
+        $comment = $request->input('comment');
+    
+ 
+
+
+        Upc::where('id', $id)
+              ->update([
+ 
+                'verify' => $verify,
+                 'edit_date'=>$time,
+                 'edit_staff'=>$staff,
+                 'image'=>  $image,       
+                 'approved'=> $approved,
+               'category'=>   $category,
+            'subcategory'=>     $subcategory, 
+               'brand'=>  $brand, 
+              'description'=>    $description,
+               'short_desc'=>   $short_desc,
+               'size'=>   $size,
+               'uom'=>   $uom,
+               'high_cost'=>   $high_cost,
+            'benefit_uom'=>    $benefit_uom,
+           'comment'=>       $comment,
+ 
+
+                 
+                 ]);
+
+              return redirect()->back()->with('deny','The item( '.$upc.' ) has been updated.');
+
+        //return $arr;
+
+    }
+
+    public function detail($id)
+    {
+        $upcs['upcs']= Upc::where('id', $id)->get();
+
+     
+   
+              return view('detail')->with($upcs);
+
+        //return $arr;
+
+    }
+    
+
+    public function add_upc()
+    {
+    
+   
+              return view('add_upc');
+ 
+    }
+    
+    
+    public function add_upc_post(Request $request)
+    {
+ 
+        $time = $request->input('time');
+        $staff = $request->input('staff');
+        $verify = $request->input('verify');     
+        $upc = $request->input('upc');          
+        
+
+        $image = $request->input('image');        
+        $approved = $request->input('approved');
+        $verify_staff = $request->input('verify_staff');
+ 
+        $category = $request->input('category');
+        $subcategory = $request->input('subcategory');
+        $brand = $request->input('brand');
+        $description = $request->input('description');
+        $short_desc = $request->input('short_desc');
+        $size = $request->input('size');
+        $uom = $request->input('uom');
+        $high_cost = $request->input('high_cost');
+        $ingredients = $request->input('ingredients');
+        $benefit_uom = $request->input('benefit_uom');
+        $comment = $request->input('comment');
+    
+ 
+
+
+        Upc::where('id', $id)
+              ->update([
+ 
+                'verify' => $verify,
+                 'edit_date'=>$time,
+                 'edit_staff'=>$staff,
+                 'image'=>  $image,       
+                 'approved'=> $approved,
+               'category'=>   $category,
+            'subcategory'=>     $subcategory, 
+               'brand'=>  $brand, 
+              'description'=>    $description,
+               'short_desc'=>   $short_desc,
+               'size'=>   $size,
+               'uom'=>   $uom,
+               'high_cost'=>   $high_cost,
+            'benefit_uom'=>    $benefit_uom,
+           'comment'=>       $comment,
+ 
+
+                 
+                 ]);
+
+              return redirect()->back()->with('deny','The item( '.$upc.' ) has been updated.');
+
+        //return $arr;
+
+    }
+    
+ 
+    
+    function  status(Request $request)
+    {
+        
+     if($request->ajax())
+     {
+      $output = '';
+      $query = $request->get('query');
+      if($query != '')
+      {
+        if(strlen($query)==12){
+            $upc_left2=substr($query,0,12);
+            $b2 = str_split($upc_left2);
+            $c2 = ($b2[0]+$b2[2]+$b2[4]+$b2[6]+$b2[8]+$b2[10])*3;
+            $d2 = ($b2[1]+$b2[3]+$b2[5]+$b2[7]+$b2[9]);
+            $e2 = $c2 + $d2;
+            $f2 = $e2%10;
+            $g2 = 10-$f2;
+             if($g2==10){$g2=0;	}
+            
+             if($b2[11]==$g2){$cv = '1'; }
+             
+             }
+             
+            if(strlen($query)==13){
+            $upc_left3=substr($query,0,13);
+            $b3 = str_split($upc_left3);
+            $c3 = ($b3[0]+$b3[2]+$b3[4]+$b3[6]+$b3[8]+$b3[10]);
+            $d3 = ($b3[1]+$b3[3]+$b3[5]+$b3[7]+$b3[9]+$b3[11])*3;
+            $e3 = $c3 + $d3;
+            $f3 = $e3%10;
+            $g3 = 10-$f3;
+             if($g3==10){$g3=0;	 }
+             
+             if($b3[12]==$g3){$cv = '1'; }
+             
+             
+             }
+            
+
+       $data = Upc::where('upc', 'like', $query)->get();    
+        
+       foreach($data as $d){
+
+        $verify = $d->verify;
+        $upc = $d->upc;
+        $description = $d->description;
+                
+
+           }
+
+      
+      }
+     
+      if($data and $verify == 1){$output = "<div class='alert alert-danger'> The upc (".$upc.") is alrealy in the APL.<br>Approved : ".$description."<br>You do not need to upload it.</div>"; }
+      if($data and $verify == 2){$output = "<div class='alert alert-danger'> The upc (".$upc.") is alrealy in the APL.<br>Pending : ".$description."<br>You do not need to upload it.</div>"; }
+      if($data and $verify == 3){$output = "<div class='alert alert-danger'> The upc (".$upc.") is alrealy in the APL.<br>Denied : ".$description."<br>You do not need to upload it.</div>"; }    
+ 
+     
+   
+      return $data = array(
+       'table_data'  => $output
+        );
+
+     // echo json_encode($data);
+     }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -206,16 +430,7 @@ class UpcController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+ 
 
     /**
      * Update the specified resource in storage.

@@ -53,8 +53,13 @@ Route::get('/pending_cate', 'UpcController@pending_cate')->name('pending_cate');
 
 Route::get('/recent_edit', 'UpcController@recent_edit')->name('recent_edit');
 
+Route::post('/edit/{id}', 'UpcController@edit')->name('edit');
 
+Route::get('/detail/{id}', 'UpcController@detail')->name('detail');
 
+Route::get('/add_upc', 'UpcController@add_upc')->name('add_upc');
+Route::post('/add_upc', 'UpcController@add_upc_post')->name('add_upc_post');
+Route::get('/add_upc/status', 'UpcController@status')->name('add_upc_status');
 
 
 Route::get('/t', function () {

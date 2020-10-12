@@ -76,10 +76,7 @@ $c_a54 = App\Models\Upc::where('verify',1)->where('category',54)->count() ;
 
 
 ?>
-<?use Carbon\Carbon;
-$time = Carbon::now()->format('Y-m-d');
 
-?>
 
 
     </head>
@@ -152,7 +149,7 @@ $time = Carbon::now()->format('Y-m-d');
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{route('dashboard')}}" class="brand-link">
+    <a href="{{route('recent_edit')}}" class="brand-link">
     <img src="{{asset('storage/MD_logo.png')}}" alt=" " class="brand-image   elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">APL Management</span>
@@ -279,6 +276,28 @@ $time = Carbon::now()->format('Y-m-d');
 
           <li class="nav-header">Tools</li>
 
+          <li class="nav-item has-treeview">
+            <a href="{{route('add_upc')}}" class="nav-link @if( $segment == 'add_upc') active @endif">
+                <i class="nav-icon fas fa-upload"></i>
+              <p>
+                Add UPC
+
+              </p>
+            </a>
+
+          </li>
+
+
+
+
+
+
+
+
+
+
+
+
 
           <li class="nav-item">
             <a href="#"  >
@@ -311,6 +330,7 @@ $time = Carbon::now()->format('Y-m-d');
 
 
           </li>
+
 
 
 

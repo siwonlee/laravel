@@ -122,7 +122,7 @@
 
             <tr class="border-b">
 
-            <th class="text-left p-1 px-1">Verified Date</th>
+            <th class="text-left p-1 px-1" width=10%>Verified Date</th>
             <th class="text-left p-1 px-1">Status</th>
             <th class="text-left p-1 px-1">Staff</th>
 
@@ -178,13 +178,25 @@ $nu = optional($nu->getIngre);
 
 
 
-
+{{-- 
         <form action="upc_new_digiteye.php" target="_blank">
 
         <td class="p-1 px-1"> <input type=hidden name=upcCode value="{{$c->upc}}"></input> <button class="btn btn-default btn-sm  "  type=submit data-toggle="tooltip"
         title="See more details of the item.">
         <span class="fa fa-search" ></span></button>
-        </form>
+        </form> --}}
+ 
+
+        <td class="p-1 px-1"> 
+        
+        
+ 
+    
+
+        <a href="{{route('detail', ['id'=>$c->id])}}" target=_blank>  <button class="btn btn-default btn-sm  " >    <span class="fa fa-search" data-toggle="tooltip" title="Further details of the upc "  ></span>  </button> </a>
+
+
+
 
         <a href="{{route('make_approved', ['id'=>$c->id])}}">  <button class="btn btn-default btn-sm  " >    <span class="fa fa-thumbs-up" data-toggle="tooltip" title="WIC approved item"  ></span>  </button> </a>
   <!--     <a href="{{route('make_denied', ['id'=>$c->id])}}">  <button class="btn btn-default btn-sm  " >    <span class="fa fa-thumbs-down" data-toggle="tooltip" title="It is NOT WIC approved."  ></span>  </button>   </a>
@@ -211,7 +223,7 @@ $nu = optional($nu->getIngre);
 
         <tr class="border-b hover:bg-orange-100 bg-gray-100 align-top">
 
-        <td style="border-top:none;" ><img src="{{$c->image}}" class="shadow rounded max-w-full h-auto align-middle border-none"></td>
+        <td style="border-top:none;" ><img src="{{$c->image}}" class="shadow rounded max-w-full h-auto align-middle border-none object-cover"></td>
         <td class="p-1 px-1"colspan=5>Ingredients : {{$nu->ingredients}}
         <div style="padding-top:20px;">Source : {{$c->add_source}}_{{$c->add_source_desc}}</div>
         <div style="padding-top:0px;">Long Description : {{$c->long_desc}}</div>

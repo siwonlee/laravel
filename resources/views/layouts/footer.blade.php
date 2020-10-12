@@ -67,5 +67,37 @@ $.widget.bridge('uibutton', $.ui.button)
 @livewireScripts
 
 
+
+<script>
+  $(document).ready(function(){
+  
+   add_upc_status_onpage();
+  
+   function add_upc_status_onpage(query = '')
+   {
+    $.ajax({
+     url:"{{ route('add_upc_status') }}",
+     method:'GET',
+     data:{query:query},
+     dataType:'json',
+     success:function(data)
+     {
+      $('#status').html(data.table_data);
+
+     }
+    })
+   }
+  
+   $(document).on('click', '#status_btn', function(){
+    var query = $('#upc1').val();
+    add_upc_status_onpage(query);
+  
+   });
+  });
+  </script>
+
+
+
+
 </body>
 </html>
