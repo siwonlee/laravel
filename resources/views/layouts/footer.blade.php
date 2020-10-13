@@ -71,9 +71,9 @@ $.widget.bridge('uibutton', $.ui.button)
 <script>
   $(document).ready(function(){
   
-   add_upc_status_onpage();
+  // add_upc_status_onpage();
   
-   function add_upc_status_onpage(query = '')
+   function add_upc_status_onpage(query)
    {
     $.ajax({
      url:"{{ route('add_upc_status') }}",
@@ -90,8 +90,14 @@ $.widget.bridge('uibutton', $.ui.button)
   
    $(document).on('click', '#status_btn', function(){
     var query = $('#upc1').val();
+
+
     add_upc_status_onpage(query);
-  
+
+    console.log(query);
+
+
+    
    });
   });
   </script>

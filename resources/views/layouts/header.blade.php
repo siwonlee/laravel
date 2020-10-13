@@ -288,8 +288,7 @@ $c_a54 = App\Models\Upc::where('verify',1)->where('category',54)->count() ;
           </li>
 
 
-
-
+ 
 
 
 

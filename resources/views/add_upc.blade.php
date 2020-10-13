@@ -54,23 +54,7 @@
                 <input type=hidden name=staff value="$staff"></input>
                 <input type=hidden name=add_date value="=>echo $date;"></input> 
             
-        <tr>
-            <td  width=15%>STATUS:</td>
-            <td width=35%>
-            
-            
-            <select   class="form-control form-input rounded-md shadow-sm mt-1 block w-full"    name=approved   >
-            <option selected  >Choose one </option>  
-            <option value="Yes"  >Approved</option>
-            <option value="no"    >Not Approved</option>
-            <option value="Pending"  >Pending </option>
-            </select>
-            
-            
-            
-            </td>
-            <td></td><td></td>
-            </tr>
+ 
 
             <tr  >
             <td  width=15%>CATEGORY:</td>

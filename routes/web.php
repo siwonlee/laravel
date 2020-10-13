@@ -60,6 +60,7 @@ Route::get('/detail/{id}', 'UpcController@detail')->name('detail');
 Route::get('/add_upc', 'UpcController@add_upc')->name('add_upc');
 Route::post('/add_upc', 'UpcController@add_upc_post')->name('add_upc_post');
 Route::get('/add_upc/status', 'UpcController@status')->name('add_upc_status');
+Route::get('/add_upc/sub/{id}', 'UpcController@subcategory');
 
 
 Route::get('/t', function () {

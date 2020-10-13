@@ -320,7 +320,9 @@ class UpcController extends Controller
      {
       $output = '';
       $query = $request->get('query');
-      if($query != '')
+
+ 
+      if($query != '' and  (strlen($query)==12 or strlen($query)==13 or strlen($query)==8 ))
       {
         if(strlen($query)==12){
             $upc_left2=substr($query,0,12);
@@ -332,7 +334,7 @@ class UpcController extends Controller
             $g2 = 10-$f2;
              if($g2==10){$g2=0;	}
             
-             if($b2[11]==$g2){$cv = '1'; }
+             if($b2[11]==$g2){$cv = '1'; }else{$cv = '0';}
              
              }
              
@@ -346,51 +348,75 @@ class UpcController extends Controller
             $g3 = 10-$f3;
              if($g3==10){$g3=0;	 }
              
-             if($b3[12]==$g3){$cv = '1'; }
+             if($b3[12]==$g3){$cv = '1'; }else{$cv = '0';}
              
+
+
              
              }
-            
+ 
 
        $data = Upc::where('upc', 'like', $query)->get();    
-        
-       foreach($data as $d){
+       
+       if(count($data)  ){
 
-        $verify = $d->verify;
-        $upc = $d->upc;
-        $description = $d->description;
-                
+          foreach($data as $d){
 
-           }
+            $verify = $d->verify;
+            $upc = $d->upc;
+            $description = $d->description;
+             }
+      if($cv == '1'     and $verify == 1){$output = "<div class='alert alert-danger'> The upc (".$upc.") is alrealy in the APL.<br>Approved : ".$description."<br>No need to add it.</div>"; }
+      if($cv == '1'    and $verify == 2){$output = "<div class='alert alert-danger'> The upc (".$upc.") is alrealy in the APL.<br>Pending : ".$description."<br>No need to add it.</div>"; }
+      if($cv == '1'    and $verify == 3){$output = "<div class='alert alert-danger'> The upc (".$upc.") is alrealy in the APL.<br>Denied : ".$description."<br>No need to add it.</div>"; }    
+ 
+
+
+       }else{
+
+       
+    if($cv == '1' )  { $output = "<div class='alert alert-success'> Please add it.</div>"; }     
+    if($cv == '0'){ $output = "<div class='alert alert-danger'> It has a wrong check digit.</div>"; }
+    
+       }
+
+
+    
 
       
+      }else{
+
+        $output = "<div class='alert alert-danger'> The upc length should be 8, 12 or 13 including a check digit at the end.</div>";
+
+
       }
-     
-      if($data and $verify == 1){$output = "<div class='alert alert-danger'> The upc (".$upc.") is alrealy in the APL.<br>Approved : ".$description."<br>You do not need to upload it.</div>"; }
-      if($data and $verify == 2){$output = "<div class='alert alert-danger'> The upc (".$upc.") is alrealy in the APL.<br>Pending : ".$description."<br>You do not need to upload it.</div>"; }
-      if($data and $verify == 3){$output = "<div class='alert alert-danger'> The upc (".$upc.") is alrealy in the APL.<br>Denied : ".$description."<br>You do not need to upload it.</div>"; }    
+
+
+
  
-     
+   }
+
+
+ 
+    
+
    
       return $data = array(
        'table_data'  => $output
+ 
         );
 
      // echo json_encode($data);
      }
-    }
+ 
 
+     public function subcategory()
+     {
+         //
+     }
+ 
 
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 
