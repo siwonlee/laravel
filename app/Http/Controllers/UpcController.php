@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Upc;
-use Carbon\Carbon;
+use App\Models\Category;
+
+use Carbon\Carbon;  
 use Auth;
 
  
@@ -104,7 +106,7 @@ class UpcController extends Controller
     }
     public function recent_edit()
     {
-        $upcs['upcs'] = Upc::where('edit_date','!=' ,'')->orderby('edit_date','desc')->paginate(10) ;
+        $upcs['upcs'] = Upc::where('edit_date','!=' ,'')->orderby('timestamp','desc')->paginate(10) ;
         return view('temp')->with($upcs);
         //return $arr;
 
@@ -178,6 +180,26 @@ class UpcController extends Controller
     public function edit(Request $request, $id)
     {
  
+
+        $request->validate([
+        
+            'upc' => 'required',
+            'category' => 'required',
+            'subcategory' => 'required',
+            'brand' => 'required',
+            'description' => 'required',
+            'short_desc' => 'required',
+            'size' => 'required',
+            'uom' => 'required',
+            'high_cost' => 'required',
+            'benefit_qt' => 'required',
+            'benefit_uom' => 'required',
+            'upc' => 'required',
+
+
+
+        ]);
+
         $time = $request->input('time');
         $staff = $request->input('staff');
         $verify = $request->input('verify');     
@@ -197,6 +219,8 @@ class UpcController extends Controller
         $uom = $request->input('uom');
         $high_cost = $request->input('high_cost');
         $ingredients = $request->input('ingredients');
+        $benefit_qt = $request->input('benefit_qt');
+        
         $benefit_uom = $request->input('benefit_uom');
         $comment = $request->input('comment');
     
@@ -220,6 +244,7 @@ class UpcController extends Controller
                'uom'=>   $uom,
                'high_cost'=>   $high_cost,
             'benefit_uom'=>    $benefit_uom,
+            'benefit_qt' => $benefit_qt,
            'comment'=>       $comment,
  
 
@@ -247,65 +272,107 @@ class UpcController extends Controller
 
     public function add_upc()
     {
-    
-   
-              return view('add_upc');
+
+        return view('add_upc');
  
     }
     
+    public function subcategory($id){
+        echo json_encode(Category::where('cate', $id)->get());
+    }
+
+
+
+
+
     
     public function add_upc_post(Request $request)
     {
+   
+
+        $request->validate([
+        
+            'upc' => 'required',
+            'category' => 'required',
+            'subcategory' => 'required',
+            'brand' => 'required',
+            'description' => 'required',
+           
+            'size' => 'required',
+            'uom' => 'required'
+
+          ]);
+
+
+
+
+
+
+
+   if($request->hasFile('pic')){
+       $pic = $request->pic->getClientOriginalName();
+       $request->pic->storeAs('upload_img', $pic,'public');
+}else{$pic='';}
+   if($request->hasFile('pic1')){
+       $pic1 = $request->pic1->getClientOriginalName();
+       $request->pic1->storeAs('upload_img',$pic1, 'public');
+    }else{$pic1='';}
+
+   if($request->hasFile('pic2')){
+   $pic2 = $request->pic2->getClientOriginalName();
+    $request->pic2->storeAs('upload_img',$pic2, 'public');
+}else{$pic2='';}       
+  
+
  
-        $time = $request->input('time');
-        $staff = $request->input('staff');
-        $verify = $request->input('verify');     
-        $upc = $request->input('upc');          
+        
+        
+       
         
 
-        $image = $request->input('image');        
-        $approved = $request->input('approved');
-        $verify_staff = $request->input('verify_staff');
- 
+
+        $time = $request->input('time');
+        $staff = $request->input('staff');
+   
+
+        $upc = $request->input('upc');          
         $category = $request->input('category');
-        $subcategory = $request->input('subcategory');
-        $brand = $request->input('brand');
-        $description = $request->input('description');
-        $short_desc = $request->input('short_desc');
+        $subcategory = $request->input('subcategory');  
+        $brand = $request->input('brand');        
+        $description = $request->input('description');        
         $size = $request->input('size');
         $uom = $request->input('uom');
-        $high_cost = $request->input('high_cost');
-        $ingredients = $request->input('ingredients');
-        $benefit_uom = $request->input('benefit_uom');
-        $comment = $request->input('comment');
-    
- 
+   
 
 
-        Upc::where('id', $id)
-              ->update([
+  
+        Upc::create([
  
-                'verify' => $verify,
-                 'edit_date'=>$time,
-                 'edit_staff'=>$staff,
-                 'image'=>  $image,       
-                 'approved'=> $approved,
+               'upc' => $upc,
                'category'=>   $category,
-            'subcategory'=>     $subcategory, 
-               'brand'=>  $brand, 
+                'subcategory'=>     $subcategory,     
+                'brand'=>  $brand, 
               'description'=>    $description,
-               'short_desc'=>   $short_desc,
                'size'=>   $size,
-               'uom'=>   $uom,
-               'high_cost'=>   $high_cost,
-            'benefit_uom'=>    $benefit_uom,
-           'comment'=>       $comment,
- 
+               'uom'=>   $uom,               
+                
+               'verify' => 1,
+               'add_date'=>$time,
+               'edit_date'=>$time,
+               'verify_date'=>$time,
+               
+               'add_staff'=>$staff,
+               'edit_staff'=>$staff,
+               'verify_staff'=>$staff,
+               'pic'=>  $pic,       
+               'pic1'=> $pic1,
+               'pic2'=> $pic2,
 
-                 
+ 
+                  
                  ]);
 
-              return redirect()->back()->with('deny','The item( '.$upc.' ) has been updated.');
+              return redirect()->back()->with('approved','The item( '.$upc.' ) has been added.');
 
         //return $arr;
 
@@ -313,7 +380,7 @@ class UpcController extends Controller
     
  
     
-    function  status(Request $request)
+    public   function  status(Request $request)
     {
         
      if($request->ajax())
@@ -370,14 +437,14 @@ class UpcController extends Controller
       if($cv == '1'    and $verify == 2){$output = "<div class='alert alert-danger'> The upc (".$upc.") is alrealy in the APL.<br>Pending : ".$description."<br>No need to add it.</div>"; }
       if($cv == '1'    and $verify == 3){$output = "<div class='alert alert-danger'> The upc (".$upc.") is alrealy in the APL.<br>Denied : ".$description."<br>No need to add it.</div>"; }    
  
-
+      $disabled = "yes";    
 
        }else{
 
        
-    if($cv == '1' )  { $output = "<div class='alert alert-success'> Please add it.</div>"; }     
-    if($cv == '0'){ $output = "<div class='alert alert-danger'> It has a wrong check digit.</div>"; }
-    
+    if($cv == '1' )  { $output = "<div class='alert alert-success'> Please add it.</div>";      $disabled = "no";   }     
+    if($cv == '0'){ $output = "<div class='alert alert-danger'> It has a wrong check digit.</div>";      $disabled = "yes"; }
+
        }
 
 
@@ -387,6 +454,7 @@ class UpcController extends Controller
       }else{
 
         $output = "<div class='alert alert-danger'> The upc length should be 8, 12 or 13 including a check digit at the end.</div>";
+        $disabled = "yes";
 
 
       }
@@ -402,37 +470,31 @@ class UpcController extends Controller
 
    
       return $data = array(
-       'table_data'  => $output
+       'table_data'  => $output,
+       'disabled' => $disabled,
+      
+
  
         );
 
      // echo json_encode($data);
      }
  
-
-     public function subcategory()
-     {
-         //
-     }
- 
-
  
 
 
+   
+    public function add_upc_upload(Request $request){
 
 
+       $request->image->store('upload_img', 'public');
+  echo "done";
+
+  
 
 
-    
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
+    
 
     /**
      * Store a newly created resource in storage.

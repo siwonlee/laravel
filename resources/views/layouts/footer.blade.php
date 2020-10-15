@@ -6,11 +6,13 @@
 
 <!-- /.content-wrapper -->
 <footer class="main-footer">
-  <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
-  All rights reserved.
+
+  {{-- <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> --}}
+  {{-- All rights reserved. --}}
   <div class="float-right d-none d-sm-inline-block">
-    <b>Version</b> 3.0.5
+    <b>Version</b> 20.11.01
   </div>
+
 </footer>
 
 <!-- Control Sidebar -->
@@ -65,10 +67,10 @@ $.widget.bridge('uibutton', $.ui.button)
 @stack('modals') --}}
 
 @livewireScripts
-
-
-
+ 
+ 
 <script>
+ 
   $(document).ready(function(){
   
   // add_upc_status_onpage();
@@ -84,24 +86,87 @@ $.widget.bridge('uibutton', $.ui.button)
      {
       $('#status').html(data.table_data);
 
+if(data.disabled == 'no'){
+
+   $('.disabled').removeAttr("disabled"); 
+   $('.dis_button').removeClass("cursor-not-allowed opacity-50");   
+ 
+}
+
+     
+         console.log(data.disabled);
+
      }
     })
    }
-  
+ 
+
    $(document).on('click', '#status_btn', function(){
+   
     var query = $('#upc1').val();
 
-
+    $('#hidden_upc').attr("value",  query);
     add_upc_status_onpage(query);
 
     console.log(query);
-
+ 
 
     
    });
+
   });
   </script>
 
+<script>
+  $(document).ready(function () {
+  $('#category1').on('change', function () {
+  let id = $(this).val();
+  $('#sub_category').empty();
+  $('#sub_category').append(`<option value="0" disabled selected>Processing...</option>`);
+  $.ajax({
+  type: 'GET',
+  url: '/add_upc/sub/' + id,
+  success: function (response) {
+  var response = JSON.parse(response);
+  console.log(response);   
+  $('#sub_category').empty();
+  $('#sub_category').append(`<option value="0" disabled selected>Select Sub Category*</option>`);
+  response.forEach(element => {
+      $('#sub_category').append(`<option value="${element['subcate']}">${element['subcate']}-${element['sub_desc']}</option>`);
+      });
+  }
+});
+});
+});
+</script>
+<script language="JavaScript" type="text/javascript">
+
+
+
+  $(document).on('change', '.btn-file :file', function() {
+      var input = $(this),
+          numFiles = input.get(0).files ? input.get(0).files.length : 1,
+          label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+      input.trigger('fileselect', [numFiles, label]);
+  });
+
+  $(document).ready( function() {
+      $('.btn-file :file').on('fileselect', function(event, numFiles, label) {
+
+          var input = $(this).parents('.input-group').find(':text'),
+              log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+          if( input.length ) {
+              input.val(log);
+          } else {
+              if( log ) alert(log);
+          }
+
+      });
+  });
+
+
+</script>
 
 
 

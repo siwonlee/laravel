@@ -45,45 +45,45 @@
 			</div> </div> 
 		 
 			<div class="form-group row">
-			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> Category </label>
+			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc" > Category </label>
 			 
 			<div class="col-md-9 col-sm-9 col-xs-9">
-  			<input name = "category" class="form-control form-input rounded-md shadow-sm mt-1 block w-full "  type=text value=" {{$c->category}} "    ></input>
+  			<input name = "category" class="form-control form-input rounded-md shadow-sm mt-1 block w-full "  type=text value=" {{$c->category}} "  required  ></input>
 			</div> </div> 
 			<div class="form-group row">
 			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> Subcategory </label>
 			<div class="col-md-9 col-sm-9 col-xs-9">
-  			<input name = "subcategory" class="form-control form-input rounded-md shadow-sm mt-1 block w-full "  type=text value=" {{$c->subcategory}} "    ></input>
+  			<input name = "subcategory" class="form-control form-input rounded-md shadow-sm mt-1 block w-full "  type=text value=" {{$c->subcategory}} "required></input>
 			</div> </div> 
 			<div class="form-group row">
 			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc">Brand  </label>
 			<div class="col-md-9 col-sm-9 col-xs-9">
-  			<input name = "brand" class="form-control form-input rounded-md shadow-sm mt-1 block w-full "  type=text value=" {{$c->brand}} "    ></input>
+  			<input name = "brand" class="form-control form-input rounded-md shadow-sm mt-1 block w-full "  type=text value=" {{$c->brand}} "  required  ></input>
 			</div> </div> 
 			<div class="form-group row">
 						<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> description </label>
 			<div class="col-md-9 col-sm-9 col-xs-9">
-  			<input name = "description" class="form-control form-input rounded-md shadow-sm mt-1 block w-full "  type=text value="{{$c->description}}  "    ></input>
+  			<input name = "description" class="form-control form-input rounded-md shadow-sm mt-1 block w-full "  type=text value="{{$c->description}}  " required   ></input>
 			</div> </div> 
 			<div class="form-group row">
 						<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc">Short Description  </label>
 			<div class="col-md-9 col-sm-9 col-xs-9">
-  			<input name = "short_desc" class="form-control form-input rounded-md shadow-sm mt-1 block w-full "  type=text value=" {{$c->short_desc}}  "    ></input>
+  			<input name = "short_desc" class="form-control form-input rounded-md shadow-sm mt-1 block w-full "  type=text value=" {{$c->short_desc}}  "  required  ></input>
 			</div> </div> 
 			<div class="form-group row">
 						<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc">size  </label>
 			<div class="col-md-9 col-sm-9 col-xs-9">
-  			<input name = "size" class="form-control form-input rounded-md shadow-sm mt-1 block w-full "  type=text value=" {{$c->size}}"    ></input>
+  			<input name = "size" class="form-control form-input rounded-md shadow-sm mt-1 block w-full "  type=text value=" {{$c->size}}"   required ></input>
 			</div> </div> 
 			<div class="form-group row">
 			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> UOM </label>
 			<div class="col-md-9 col-sm-9 col-xs-9">
-  			<input name = "uom" class="form-control form-input rounded-md shadow-sm mt-1 block w-full "  type=text value=" {{$c->uom}} "    ></input>
+  			<input name = "uom" class="form-control form-input rounded-md shadow-sm mt-1 block w-full "  type=text value=" {{$c->uom}} "  required  ></input>
 			</div> </div> 
 			<div class="form-group row">
 			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> High Cost Item </label>
 			<div class="col-md-9 col-sm-9 col-xs-9">
-			<select   class="col-md-12 col-sm-12 col-xs-12 form-control"    name=high_cost  ; "    >
+			<select   class="col-md-12 col-sm-12 col-xs-12 form-control"    name=high_cost  ; "  required  >
 
 				<option value="0" <?if($c->high_cost==0){echo 'selected';}?> >NO HC</option>
 				<option value="1" <?if($c->high_cost==1){echo 'selected';}?> >HC</option>
@@ -108,14 +108,14 @@
 						<div class="form-group row">
 			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> Benefit QT  </label>
 			<div class="col-md-9 col-sm-9 col-xs-9">
-  			<input name = "benefit_qt" class="form-control form-input rounded-md shadow-sm mt-1 block w-full "  type=text value=" {{$c->benefit_qt}} "    ></input>
+  			<input name = "benefit_qt" class="form-control form-input rounded-md shadow-sm mt-1 block w-full "  type=text value=" {{$c->benefit_qt}} "  required  ></input>
 			</div> </div> 	 
  						<div class="form-group row">
 			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc">UOM for WOW  </label>
 			<div class="col-md-9 col-sm-9 col-xs-9">
 
 
-			<select   class="col-md-12 col-sm-12 col-xs-12 form-control"    name=benefit_uom ; "    >
+			<select   class="col-md-12 col-sm-12 col-xs-12 form-control"    name=benefit_uom ; "  required  >
 
 
 

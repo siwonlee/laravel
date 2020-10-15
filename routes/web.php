@@ -62,6 +62,8 @@ Route::post('/add_upc', 'UpcController@add_upc_post')->name('add_upc_post');
 Route::get('/add_upc/status', 'UpcController@status')->name('add_upc_status');
 Route::get('/add_upc/sub/{id}', 'UpcController@subcategory');
 
+Route::post('/add_upc_upload', 'UpcController@add_upc_upload')->name('add_upc_upload');
+
 
 Route::get('/t', function () {
     return view('t1');

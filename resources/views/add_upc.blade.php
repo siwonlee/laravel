@@ -6,9 +6,8 @@
 
 //$cate = $_GET['cate'];
  
-
 ?>
-
+ <?use Carbon\Carbon;?>
 
 @extends('layouts.admin')
 
@@ -49,17 +48,18 @@
             </tr>
   
             
-            <form action="upc_verify_addupc_include_post.php" id="sw1"   method="POST" enctype= "multipart/form-data">
-                <input type=hidden name=upc value="$upc"></input>
-                <input type=hidden name=staff value="$staff"></input>
-                <input type=hidden name=add_date value="=>echo $date;"></input> 
-            
+            <form action="{{route('add_upc_post')}}" id="sw1"   method="POST" enctype= "multipart/form-data">
+                
+                @csrf
+                <input type=hidden name=upc value=""  id='hidden_upc'></input>
+                <input name = "time"    type=hidden value=" {{Carbon::now()->format('Y-m-d')}}"   ></input>
+                <input name = "staff"   type=hidden value="{{Auth::user()->name}} "   ></input>
  
 
             <tr  >
             <td  width=15%>CATEGORY:</td>
-            <td width=35%><select onchange="showUser(this.value)" class="form-control form-input rounded-md shadow-sm mt-1 block w-full"   id="category1" name=cate    >
-            <option selected    >Choose one </option>  
+            <td width=35%><select   class="form-control form-input rounded-md shadow-sm mt-1 block w-full disabled"   id="category1" name=category  disabled  >
+            <option selected    >Select one </option>  
             <option value="2"   >02-Cheese or Tofu</option>
             <option value="3"   >03-Eggs</option>
             <option value="5"  >05-Breakfast Cereal </option>
@@ -91,7 +91,7 @@
             
             
             
-            <select   class="form-control form-input rounded-md shadow-sm mt-1 block w-full"  id="txtHint" onchange="showUser1(this.value)" name=sub  >	</select>
+            <select   class="form-control form-input rounded-md shadow-sm mt-1 block w-full disabled"  id="sub_category"   name=subcategory disabled >	</select>
             
             </td>
             <td></td>
@@ -100,78 +100,178 @@
             
             <tr>
             <td   >BRAND NAME:</td>
-            <td   ><input type=text class="form-control form-input rounded-md shadow-sm mt-1 block w-full" value=" " name=brand   }></input></td>
+            <td   ><input type=text class="form-control form-input rounded-md shadow-sm mt-1 block w-full disabled" value=" " name=brand   disabled ></input></td>
             <td></td>
             <td></td> 
             </tr>
             
             <tr>
             <td   >FOOD DESCRIPTION:</td>
-            <td   COLSPAN=3><input type=text class="form-control form-input rounded-md shadow-sm mt-1 block w-full" value=" " name=description    ></input></td>
+            <td   COLSPAN=3><input type=text class="form-control form-input rounded-md shadow-sm mt-1 block w-full disabled" value=" " name=description disabled   ></input></td>
                 <td></td>
             <td></td>
             </tr>
    
             <tr>
             <td   >SIZE:</td>
-            <td   ><input type=text class="form-control form-input rounded-md shadow-sm mt-1 block w-full" value=" " name=size   ></input></td>
+            <td   ><input type=text class="form-control form-input rounded-md shadow-sm mt-1 block w-full disabled" value=" " name=size disabled  ></input></td>
             <td></td>
             <td></td>
             </tr>
             <tr>
             <td   >UOM: </td>
-            <td   > <select   class="form-control form-input rounded-md shadow-sm mt-1 block w-full"  id="uom"  name=uom   >
-            <option  VALUE="OZ" >OZ </option>  
-            <option   VALUE="LB" >LB </option> 
-            <option   VALUE="GAL" >GAL </option>  
-            <option VALUE="CT" >CT </option>  
+            <td   >
                 
-                </select></td>
+                
+                
+                <select   class="form-control form-input rounded-md shadow-sm mt-1 block w-full disabled"  id="uom"  name=uom disabled  >
+         
+            
+
+
+                    <option value=""   >Select one</option>
+                        <option value="BAG"   >BAG_BAG</option>
+            
+             
+                        <option value="CAN"   >CAN_CAN</option> 
+                        <option value="CTR"   >CTR_CONTAINER</option>
+            
+                        <option value="DOZ"   >DOZ_DOZEN</option>
+            
+                        <option value="GAL"   >GAL_GALLON</option>
+                        <option value="HGL"   >HGL_HALF GALLON</option>
+             
+                        <option value="LB"   >LB_POUND</option>
+            
+                        <option value="OZ"   >OZ_OZ</option>
+                        <option value="PKG"   >PKG_PACKAGE</option>
+            
+                        <option value="QT"   >QT_QUART</option>
+                        <option value="4PK"  >4PK_4 PACKAGES</option>
+                        <option value="6PK"   >6PK_6 PACKAGES</option>
+            
+                        <option value="$$$"   >$$$_DOLLAR</option>
+            
+            
+            
+             
+                        </select>
+
+
+
+
+            
+            
+            </td>
                 <td></td>
             <td></td>
             </tr>
-            
-            <tr>
-            <td   >INGEDIENTS:</td>
-            
-            <td  colspan=3  > 
-            
-            <textarea rows="2"     form="sw1" class="form-control form-input rounded-md shadow-sm mt-1 block w-full" name=ingredients  >
-                </textarea></td>
-            
-            
-            
-            </tr>
-            
-            <tr>
-                <td   >IMAGES:</td>
+
+   
+<tr>
+    <td   >INGREDIENTS &<br>
+    NUTRITION LABEL:<br>
+    
+    <div class="panel panel-danger"  > 
+    <div class="panel-heading" style="padding:5px;important!" >
+    
+      Image types +<br>pdf,doc containing the images
+      
+    </div>
+    </div>
+    
+    
+    
+    
+    </td>
+    
+    <td  >
+     
+                  
+         <div class="input-group">
+                 <input type="text" class="form-control" readonly   placeholder=" Ingredients"    >
+                        <span class="btn btn-primary btn-file dis_button cursor-not-allowed opacity-50 " style="margin-left:5px;">
+                            Browse<input type="file" name="pic1" accept=".gif, .jpg, .png, .doc, .pdf, .jpeg, .docx"     disabled class="disabled"    /> 
+                        </span>
+                 
+                   
+                </div>		
                 
-                <td >
+     <div class="input-group" style="margin-top:10px;">
+                   <input type="text" class="form-control" readonly  placeholder=" Nutrition Label"  >
+                        <span class="btn btn-primary btn-file dis_button cursor-not-allowed opacity-50" style="margin-left:5px;" >
+                            Browse<input type="file" name="pic2" accept=".gif, .jpg, .png, .doc, .pdf, .jpeg, .docx"  disabled  class="disabled"   /> 
+                        </span>
                 
+                   
+                </div>			
                 
-                
-                
-                <div class="input-group">
-                                <span class="input-group-btn" style="display:inline;">
-                                    <span class="btn btn-primary btn-file">
-                                        Browse<input type="file" name="pic" accept="image/*"  >
-                                    </span>
-                                </span>
-                                <input type="text" class="form-control form-input rounded-md shadow-sm mt-1 block w-full" readonly      >
-                            </div>
-                            Click "Browse", select the file, then click "Open". 
-                            </td>
-                <td colspan=2>
-                
-                
-                
-                
-                
+                 <div    class='ui red label  '   ><div class='content'>The file name containing special characters like % or ' will not be uploaded.<br>Please remove the special characters before uploading it.</div></div> 
                 </td>
+     
+     
+     <td  ></td>
+     
+     
+    
+    </tr>
+     
+    
+    <tr>
+    
+    
+    
+    
+    
+    
+    
+    <td   >PRODUCT IMAGE:<br>
+    
+    
+    <div class="panel panel-danger"  > 
+    <div class="panel-heading" style="padding:5px;important!" >
+    
+      Image types ONLY
+      
+    </div></div>
+     
+    
+    
+    
+    </td>
+    
+    <td  >
+     
+     
+     
+     
+     <div class="input-group">
+                    
+            <input type="text" class="form-control" readonly placeholder="Product Image"  >
+
+
+
+                        <span class="btn btn-primary btn-file dis_button cursor-not-allowed opacity-50" style="margin-left:5px;">
+                            Browse<input type="file" name="pic" accept="image/*"  disabled  class="disabled"    /> 
+                        </span>
             
-            </TR>
-            
-  
+                   
+                </div>
+                
+             
+                
+             
+                </td>
+     
+               
+
+
+            </tr>
+
+
+
+ 
+ 
   
    
    
@@ -180,7 +280,7 @@
             
                     <td colspan=4 style="text-align:center;" align=center>  
                 
-                    <button type=submit class=" btn btn-success btn-lg " data-toggle="tooltip" data-placement="right"  >Save</button> 
+                    <button type=submit id="add_button" class=" bg-green-700 hover:bg-green-500 text-white py-2 px-4 rounded dis_button cursor-not-allowed opacity-50 disabled"  disabled >Add</button> 
                 </td>
             </tr>
   </table> 
@@ -189,6 +289,82 @@
 </div> 
    
  
+{{--  add list--}}
+
+<div class="px-3 py-4 ">
+
+    <table class="w-full text-md bg-white shadow-md rounded mb-4 table">
+	<thead>
+	            <tr>
+                <td>Add-Date</td>
+				   <td>Image</td>
+                <td>UPC</td>
+                <td>Brand</td>
+                <td>Description</td>
+                <td>Size/UOM</td>
+             
+
+            </tr>
+	</thead>
+	<tbody>
+	
+        <?
+
+$staff = Auth::user()->name;  
+ 
+$upcs = App\Models\Upc::where('add_staff',$staff )-> orderby('timestamp','desc')->paginate(10)    ;
+
+ ?>
+
+ @foreach($upcs as $c)
+
+
+
+            <tr>
+                <td> {{$c->add_date}}</td> 
+				<td>
+				
+		 				
+<?
+if($c->pic ==''){echo "";}else{?>
+	<a href="storage/upload_img/{{$c->pic}}" target="_blank"><img class="ui tiny image rounded" src="storage/upload_img/{{$c->pic}}"></a>
+<?}?>
+
+ 		
+				
+				
+				</td>
+                <td>{{$c->upc}}</td>
+                <td>{{$c->brand}}</td>
+                <td>{{$c->description}}</td>
+                <td>{{$c->size}}/{{$c->uom}}</td>
+             
+
+            </tr>
+
+
+
+ @endforeach
+ 
+
+ 
+
+
+
+
+
+
+ 
+		
+	</tbody>
+</table>
+
+{{ $upcs->links() }}
+</div>
+
+
+
+
 
   
  
