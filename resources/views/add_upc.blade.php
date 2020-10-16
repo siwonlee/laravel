@@ -327,7 +327,7 @@ $upcs = App\Models\Upc::where('add_staff',$staff )-> orderby('timestamp','desc')
 		 				
 <?
 if($c->pic ==''){echo "";}else{?>
-	<a href="storage/upload_img/{{$c->pic}}" target="_blank"><img class="ui tiny image rounded" src="storage/upload_img/{{$c->pic}}"></a>
+	<a href="storage/upload_img/{{$c->pic}}" target="_blank"><img class="h-32 w-32 ui tiny image rounded" src="storage/upload_img/{{$c->pic}}"></a>
 <?}?>
 
  		

@@ -287,6 +287,16 @@ $c_a54 = App\Models\Upc::where('verify',1)->where('category',54)->count() ;
 
           </li>
 
+          <li class="nav-item has-treeview">
+            <a href="{{route('check_digit')}}" class="nav-link @if( $segment == 'check_digit') active @endif">
+                <i class="nav-icon fas fa-check"></i>
+              <p>
+                Check Digit
+
+              </p>
+            </a>
+
+          </li>
 
  
 

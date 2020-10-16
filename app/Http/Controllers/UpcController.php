@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Upc;
 use App\Models\Category;
+use App\Models\Ingredient;
 
 use Carbon\Carbon;  
 use Auth;
@@ -219,6 +220,7 @@ class UpcController extends Controller
         $uom = $request->input('uom');
         $high_cost = $request->input('high_cost');
         $ingredients = $request->input('ingredients');
+        $nutrition = $request->input('nutrition');
         $benefit_qt = $request->input('benefit_qt');
         
         $benefit_uom = $request->input('benefit_uom');
@@ -251,11 +253,110 @@ class UpcController extends Controller
                  
                  ]);
 
-              return redirect()->back()->with('deny','The item( '.$upc.' ) has been updated.');
+                 $result = Ingredient::where('upc', $upc)->first();
+               
+
+
+
+                 if($result){
+
+                 Ingredient::where('upc', $upc)
+                 ->update([
+    
+                   'ingredients' => $ingredients,
+                    'nutrition'=>$nutrition,
+                       
+                    ]);
+
+                 }else{
+
+                    Ingredient::create([
+                        'id' => $id,
+                        'upc' => $upc,
+                      'ingredients' => $ingredients,
+                       'nutrition'=>$nutrition,
+                          
+                       ]);
+
+
+
+                 }
+
+
+
+
+              return redirect()->back()->with('approved','The item( '.$upc.' ) has been updated.');
 
         //return $arr;
 
     }
+
+
+
+    public function edit_attach(Request $request, $id)
+    {
+ 
+
+
+
+        
+   if($request->hasFile('pic')){
+    $pic = $request->pic->getClientOriginalName();
+    $request->pic->storeAs('upload_img', $pic,'public');
+}else{$pic = $request->input('pic'); }
+if($request->hasFile('pic1')){
+    $pic1 = $request->pic1->getClientOriginalName();
+    $request->pic1->storeAs('upload_img',$pic1, 'public');
+ }else{ $pic1 = $request->input('pic1');}
+
+if($request->hasFile('pic2')){
+$pic2 = $request->pic2->getClientOriginalName();
+ $request->pic2->storeAs('upload_img',$pic2, 'public');
+}else{ $pic2 = $request->input('pic2');}       
+
+
+
+        $request->validate([
+
+            'upc' => 'required',
+ 
+  
+
+        ]);
+
+        $time = $request->input('time');
+        $staff = $request->input('staff');
+        $upc = $request->input('upc');
+       
+          
+        
+ 
+  
+    
+ 
+
+
+        Upc::where('id', $id)
+              ->update([
+ 
+                 
+                 'edit_date'=>$time,
+                 'edit_staff'=>$staff,
+                 'pic'=>  $pic,       
+                 'pic1'=> $pic1,
+               'pic2'=>   $pic2,
+    
+                 
+                 ]);
+
+              return redirect()->back()->with('approved','The item( '.$upc.' ) has been updated.');
+
+        //return $arr;
+
+    }
+
+
+
 
     public function detail($id)
     {

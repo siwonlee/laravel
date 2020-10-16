@@ -54,6 +54,8 @@ Route::get('/pending_cate', 'UpcController@pending_cate')->name('pending_cate');
 Route::get('/recent_edit', 'UpcController@recent_edit')->name('recent_edit');
 
 Route::post('/edit/{id}', 'UpcController@edit')->name('edit');
+Route::post('/edit_attach/{id}', 'UpcController@edit_attach')->name('edit_attach');
+
 
 Route::get('/detail/{id}', 'UpcController@detail')->name('detail');
 
@@ -63,6 +65,17 @@ Route::get('/add_upc/status', 'UpcController@status')->name('add_upc_status');
 Route::get('/add_upc/sub/{id}', 'UpcController@subcategory');
 
 Route::post('/add_upc_upload', 'UpcController@add_upc_upload')->name('add_upc_upload');
+Route::get('/check_digit', 'CheckdigitController@index')->name('check_digit');
+Route::get('/check_digit/find', 'CheckdigitController@find')->name('check_digit.find');
+Route::get('/check_digit/check', 'CheckdigitController@check')->name('check_digit.check');
+Route::get('/check_digit/convert', 'CheckdigitController@convert')->name('check_digit.convert');
+Route::get('/check_digit/plu', 'CheckdigitController@plu')->name('check_digit.plu');
+
+
+
+Route::get('/checkdigit', function () {
+    return view('checkdigit');
+});
 
 
 Route::get('/t', function () {

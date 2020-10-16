@@ -67,7 +67,17 @@ $.widget.bridge('uibutton', $.ui.button)
 @stack('modals') --}}
 
 @livewireScripts
- 
+
+
+
+
+
+
+
+
+
+
+
  
 <script>
  
@@ -167,6 +177,153 @@ if(data.disabled == 'no'){
 
 
 </script>
+
+
+
+
+ 
+<script>
+  $(document).ready(function(){
+    function check_find(query)
+   {
+    $.ajax({
+     url:"{{ route('check_digit.find') }}",
+     method:'GET',
+     data:{query:query},
+     dataType:'json',
+     success:function(data)
+     {
+      $('#find_result').html(data.table_data);
+   }
+    })
+   }
+    $(document).on('click', '#find', function(){
+     var query = $('#find_input').val();
+    check_find(query);
+    console.log(query);
+   });
+  });
+  </script>
+ 
+ <script>
+  $(document).ready(function(){
+    function check_check(query)
+   {
+    $.ajax({
+     url:"{{ route('check_digit.check') }}",
+     method:'GET',
+     data:{query:query},
+     dataType:'json',
+     success:function(data)
+     {
+      $('#check_result').html(data.table_data);
+   }
+    })
+   }
+    $(document).on('click', '#check', function(){
+     var query = $('#check_input').val();
+    check_check(query);
+    console.log(query);
+   });
+  });
+  </script>
+
+<script>
+  $(document).ready(function(){
+    function check_plu(query)
+   {
+    $.ajax({
+     url:"{{ route('check_digit.plu') }}",
+     method:'GET',
+     data:{query:query},
+     dataType:'json',
+     success:function(data)
+     {$('#plu_result').html(data.table_data);
+   }
+    })
+   }
+    $(document).on('click', '#plu', function(){
+     var query = $('#plu_input').val();
+    check_plu(query);
+    console.log(query);
+   });
+  });
+  </script>
+
+<script>
+  $(document).ready(function(){
+    function check_convert(query)
+   {
+    $.ajax({
+     url:"{{ route('check_digit.convert') }}",
+     method:'GET',
+     data:{query:query},
+     dataType:'json',
+     success:function(data)
+     {$('#convert_result').html(data.table_data);
+   }
+    })
+   }
+    $(document).on('click', '#convertae', function(){
+     var query = $('#convertae_input').val();
+    check_convert(query);
+    console.log(query);
+   });
+
+   $(document).on('click', '#convertea', function(){
+     var query = $('#convertea_input').val();
+    check_convert(query);
+    console.log(query);
+   });
+
+
+
+  });
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

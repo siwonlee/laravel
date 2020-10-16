@@ -223,13 +223,30 @@ $nu = optional($nu->getIngre);
 
         <tr class="border-b hover:bg-orange-100 bg-gray-100 align-top">
 
-        <td style="border-top:none;" ><img src="{{$c->image}}" class="shadow rounded max-w-full h-auto align-middle border-none object-cover"></td>
+        <td style="border-top:none;" >
+@if ($c->image and !$c->pic )
+    <img src="{{asset($c->image)}}" class="shadow rounded max-w-full h-auto align-middle border-none object-cover">
+@endif
+
+@if ($c->pic and !$c->image)
+    <img src="{{asset('storage/upload_img/'.$c->pic)}}" class="shadow rounded max-w-full h-auto align-middle border-none object-cover">
+@endif
+    
+@if ($c->image and $c->pic)
+    <img src="{{asset($c->image)}}" class="shadow rounded max-w-full h-auto align-middle border-none object-cover">
+@endif
+        
+        
+        </td>
         <td class="p-1 px-1"colspan=5>Ingredients : {{$nu->ingredients}}
         <div style="padding-top:20px;">Source : {{$c->add_source}}_{{$c->add_source_desc}}</div>
         <div style="padding-top:0px;">Long Description : {{$c->long_desc}}</div>
 
 
-        <div style="padding-top:20px;">Attachments : <a href="{{asset('/storage/upload_img/'.$c->pic)}}">{{$c->pic}}</a></div>
+      
+
+        <div style="padding-top:20px;">Attachments : <i class="fas fa-edit" data-toggle="modal" data-target="#edit_attach{{$c->id}}"></i></div> 
+        <a href="{{asset('/storage/upload_img/'.$c->pic)}}">{{$c->pic}}</a></div>
         <div style="padding-top:0px;">  <a href="{{asset('/storage/upload_img/'.$c->pic1)}}">{{$c->pic1}}</a> </div>
         <div style="padding-top:0px;">  <a href="{{asset('/storage/upload_img/'.$c->pic2)}}">{{$c->pic2}}</a> </div>
         </td>
@@ -251,6 +268,8 @@ $nu = optional($nu->getIngre);
         @include('layouts.modal', $c)
 
         @include('layouts.modal_confirm', $c)
+
+        @include('layouts.modal_attach', $c)
 
         @endforeach
 

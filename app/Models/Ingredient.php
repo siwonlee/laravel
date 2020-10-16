@@ -11,4 +11,12 @@ class Ingredient extends Model
 
     protected $table = 'apl_ingredient';
 
+    protected $fillable = [
+
+    'upc',
+    'id',
+    'ingredients',
+    'nutrition'        
+    ];
+
 }

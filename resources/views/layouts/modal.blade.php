@@ -24,7 +24,7 @@
 	   @csrf
 	
 			<div class="form-group row">
-  			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> Image </label>
+  			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> Image(url link) </label>
 			<div class="col-md-9 col-sm-9 col-xs-9">
   			<input name = "image" class="form-control form-input rounded-md shadow-sm mt-1 block w-full "  type=text value=" {{$c->image}}"   ></input>
 			</div> </div> 
@@ -34,7 +34,7 @@
   			<input name = "approved" class="form-control form-input rounded-md shadow-sm mt-1 block w-full "  type=text value="{{$c->approved}} " readonly  ></input>
 			</div> </div> 
 			<div class="form-group row">
-  			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> Staff </label>
+  			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> Verify Staff </label>
 			<div class="col-md-9 col-sm-9 col-xs-9">
   			<input name = "verify_staff" class="form-control form-input rounded-md shadow-sm mt-1 block w-full "  type=text value="{{$c->verify_staff}} " readonly  ></input>
 			</div> </div> 
@@ -61,7 +61,7 @@
   			<input name = "brand" class="form-control form-input rounded-md shadow-sm mt-1 block w-full "  type=text value=" {{$c->brand}} "  required  ></input>
 			</div> </div> 
 			<div class="form-group row">
-						<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> description </label>
+						<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> Description </label>
 			<div class="col-md-9 col-sm-9 col-xs-9">
   			<input name = "description" class="form-control form-input rounded-md shadow-sm mt-1 block w-full "  type=text value="{{$c->description}}  " required   ></input>
 			</div> </div> 
@@ -71,7 +71,7 @@
   			<input name = "short_desc" class="form-control form-input rounded-md shadow-sm mt-1 block w-full "  type=text value=" {{$c->short_desc}}  "  required  ></input>
 			</div> </div> 
 			<div class="form-group row">
-						<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc">size  </label>
+						<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc">Size  </label>
 			<div class="col-md-9 col-sm-9 col-xs-9">
   			<input name = "size" class="form-control form-input rounded-md shadow-sm mt-1 block w-full "  type=text value=" {{$c->size}}"   required ></input>
 			</div> </div> 
@@ -94,7 +94,7 @@
 			</div> </div> 
 
 						<div class="form-group row">
-			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> ingredients </label>
+			<label class="control-label col-md-3 col-sm-3 col-xs-3 text-gray-700" for="short_desc"> Ingredients </label>
 			<div class="col-md-9 col-sm-9 col-xs-9">
   	<textarea  name = "ingredients" style="height:100px;"  class="form-control col-md-12 col-sm-12 col-xs-12"  >{{$nu->ingredients}}</textarea> 
 			</div> </div> 
