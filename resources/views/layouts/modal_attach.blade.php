@@ -15,7 +15,8 @@
 	 
  		
 			
-					<form action="{{route('edit_attach', ['id'=>$c->id])}}"  method=post>
+					<form action="{{route('edit_attach', ['id'=>$c->id])}}"  method=post enctype="multipart/form-data">
+
 						<input name = "id" class="form-control" type=hidden value="{{$c->id}}"  ></input>
 						            <input name = "time" class="form-control  "  type=hidden value=" {{Carbon::now()->format('Y-m-d')}}"   ></input>
 				                <input name = "staff" class="form-control  "  type=hidden value="{{Auth::user()->name}} "   ></input>
@@ -36,7 +37,7 @@
 
 						 <input type="text" class="form-control" readonly   placeholder=" Ingredients"   / >
 							   <span class="btn btn-primary btn-file  h-10 " style="margin-left:5px;">
-							   Browse<input type="file" name="pic1" value="{{$c->pic}}" accept=".gif, .jpg, .png, .doc, .pdf, .jpeg, .docx"        /> 
+							   Browse<input type="file" name="pic1"   accept=".gif, .jpg, .png, .doc, .pdf, .jpeg, .docx"        /> 
 							   </span>
 						
 						  
@@ -45,7 +46,7 @@
 
 		<div class="input-group" style="margin-top:10px;">
 
-			@if ($c->pic1)
+			@if ($c->pic2)
 			<img src="{{asset('storage/upload_img/'.$c->pic2)}}" class="shadow rounded h-32 w-32 mx-4  align-middle border-none"/>	
 		   @else
 			
@@ -57,7 +58,7 @@
 
 				
 							   <span class="btn btn-primary btn-file h-10 " style="margin-left:5px;" >
-							   Browse<input type="file" name="pic2" value={{$c->pic2}} accept=".gif, .jpg, .png, .doc, .pdf, .jpeg, .docx"     /> 
+							   Browse<input type="file" name="pic2"  accept=".gif, .jpg, .png, .doc, .pdf, .jpeg, .docx"     /> 
 							   </span>
 					   
 						  
@@ -67,7 +68,7 @@
 
 					   <div class="input-group" style="margin-top:10px;">
 
-						@if ($c->pic1)
+						@if ($c->pic)
 						<img src="{{asset('storage/upload_img/'.$c->pic)}}" class="shadow rounded h-32 w-32 mx-4  align-middle border-none"/>	
 					   @else
 						
@@ -76,7 +77,7 @@
 
 
  				   
-					   <input type="text" class="form-control" value="{{$c->pic}}" readonly placeholder="Product Image"  />
+					   <input type="text" class="form-control"   readonly placeholder="Product Image"  />
 	   
 
 	   

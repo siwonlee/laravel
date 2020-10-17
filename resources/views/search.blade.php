@@ -189,7 +189,7 @@ $nu = optional($nu->getIngre);
        
        |{{$c->benefit_qt}}|{{$c->benefit_uom_wow}}|NA|{{$c->benefit_qt}}|{{$c->verify_date}}|NA|NA|{{$c->verify}}|{{$c->short_desc}}
        |NA|{{$c->plu_indicator}}|{{$c->end_date}}|{{$c->broadband_flag}}|{{$c->high_cost}}|{{$c->apl_type}} 
-       <span><button class="btn btn-danger fa fa-edit " data-toggle="modal" data-target="#wowedit "> </button></span></div>
+       <span><button class="btn btn-danger fa fa-edit " data-toggle="modal" data-target="#edit_incomplete{{$c->id}} "> </button></span></div>
       
 
 

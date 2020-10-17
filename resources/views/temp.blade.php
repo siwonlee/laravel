@@ -256,7 +256,7 @@ $nu = optional($nu->getIngre);
         <div style="padding-top:20px;">Benefit quantity : {{$c->benefit_qt}}</div>
         <div style="padding-top:0px;">Benefit UOM : {{$c->benefit_uom_wow}}</div>
          <div style="padding-top:0px;">Comment: {{$c->comment}}</div>
-         <div style="padding-top:0px;">Last Edited : {{$c->edit_date}}_{{$c->edit_staff}}</div>
+         <div style="padding-top:0px;">Last Edited : {{$c->timestamp}}_{{$c->edit_staff}}</div>
 
 
         </td>

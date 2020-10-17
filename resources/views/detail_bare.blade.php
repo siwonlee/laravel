@@ -22,7 +22,7 @@ $upcCode = $upc;
   
  
 
-<div class="alert alert-danger p-4 m-4">The upc is not our APL.  However, please review the following 3rd party information for a consideration.</div>
+<div class="alert alert-danger p-4 m-4">The upc is not our APL.  However, please review the following 3rd party information,if any, for a consideration.</div>
 
 
 

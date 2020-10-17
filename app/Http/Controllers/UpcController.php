@@ -297,22 +297,26 @@ class UpcController extends Controller
     {
  
 
-
+$upc = Upc::find($id);
+$pic = $upc->pic;
+$pic1 = $upc->pic1;
+$pic2 = $upc->pic2;
 
         
    if($request->hasFile('pic')){
     $pic = $request->pic->getClientOriginalName();
     $request->pic->storeAs('upload_img', $pic,'public');
-}else{$pic = $request->input('pic'); }
+} 
+
 if($request->hasFile('pic1')){
     $pic1 = $request->pic1->getClientOriginalName();
     $request->pic1->storeAs('upload_img',$pic1, 'public');
- }else{ $pic1 = $request->input('pic1');}
+ } 
 
 if($request->hasFile('pic2')){
 $pic2 = $request->pic2->getClientOriginalName();
  $request->pic2->storeAs('upload_img',$pic2, 'public');
-}else{ $pic2 = $request->input('pic2');}       
+}    
 
 
 
