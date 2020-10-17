@@ -276,6 +276,8 @@ $c_a54 = App\Models\Upc::where('verify',1)->where('category',54)->count() ;
 
           <li class="nav-header">Tools</li>
 
+{{-- add upc --}}
+
           <li class="nav-item has-treeview">
             <a href="{{route('add_upc')}}" class="nav-link @if( $segment == 'add_upc') active @endif">
                 <i class="nav-icon fas fa-upload"></i>
@@ -286,6 +288,24 @@ $c_a54 = App\Models\Upc::where('verify',1)->where('category',54)->count() ;
             </a>
 
           </li>
+
+
+
+          
+{{--  search --}}
+
+<li class="nav-item has-treeview">
+  <a href="{{route('search')}}" class="nav-link @if( $segment == 'search') active @endif">
+      <i class="nav-icon fas fa-search"></i>
+    <p>
+      Search
+
+    </p>
+  </a>
+
+</li>
+
+{{-- check digit --}}
 
           <li class="nav-item has-treeview">
             <a href="{{route('check_digit')}}" class="nav-link @if( $segment == 'check_digit') active @endif">
@@ -299,9 +319,18 @@ $c_a54 = App\Models\Upc::where('verify',1)->where('category',54)->count() ;
           </li>
 
  
+{{-- Recent edit --}}
 
+          <li class="nav-item has-treeview">
+            <a href="{{route('recent_edit')}}" class="nav-link @if( $segment == 'recent_edit') active @endif">
+                <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Recent Edits
 
+              </p>
+            </a>
 
+          </li>
 
 
 
@@ -348,16 +377,6 @@ $c_a54 = App\Models\Upc::where('verify',1)->where('category',54)->count() ;
 
 
 
-          <li class="nav-item has-treeview">
-            <a href="{{route('recent_edit')}}" class="nav-link @if( $segment == 'recent_edit') active @endif">
-                <i class="nav-icon fas fa-edit"></i>
-              <p>
-                Recent Edits
-
-              </p>
-            </a>
-
-          </li>
 
 
 

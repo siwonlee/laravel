@@ -71,7 +71,9 @@ Route::get('/check_digit/check', 'CheckdigitController@check')->name('check_digi
 Route::get('/check_digit/convert', 'CheckdigitController@convert')->name('check_digit.convert');
 Route::get('/check_digit/plu', 'CheckdigitController@plu')->name('check_digit.plu');
 
-
+Route::get('/search', 'SearchController@index')->name('search');
+Route::get('/search/general', 'SearchController@general')->name('search.general');
+Route::post('/search/{id}', 'SearchController@edit')->name('search.edit');
 
 Route::get('/checkdigit', function () {
     return view('checkdigit');
