@@ -22,36 +22,19 @@ $upcCode = $upc;
   
  
 
-<div class="alert alert-danger p-4 m-4">The upc is not our APL.  However, please review the following 3rd party information,if any, for a consideration.</div>
-
-
-
 <div class="container well">
 
-<button type="button" class="btn btn-primary col-md-12"> UPC LookUp</button>
+ 
+
+<div class="alert alert-danger p-4">The upc is not our APL.  However, please review the following 3rd party information,if any, for a consideration.</div>
 
 
 
-<div class="well" style="margin-top:20px;">
  
- <form class="form-horizontal" role="form" action=" ">
- 
-   
-  <div class="form-group flex">
- 
-	
-	  <div class="col-md-4">
-     <input type="text"   class="form-control" placeholder="UPC ONLY!!"  name=upcCode value=<?=$upcCode?>  >
-  </div>
-	
-	
-    <div class="col-md-2">
-<input class="btn btn-warning"   type=submit value=" FIND "  >  
-    </div> 
- 
-  </div>
 
-</form>
+ 
+ 
+ 
 
 <div class="p-4">
   <span class="glyphicon glyphicon-exclamation-sign">  </span>  
@@ -92,8 +75,18 @@ $jsonData = @file_get_contents($homepage);
  
 $phpArray = json_decode($jsonData,true);
 //print_r($phpArray);
-
+if($phpArray == null){
 ?>
+
+ 
+
+ 
+<?
+}else{
+?>
+
+
+
 
  <div class="  well" style="<?if($upcCode){}else{?>display:none;<?}?>">
 <table  class="table table-striped table-condensed">
@@ -141,35 +134,25 @@ $phpArray = json_decode($jsonData,true);
 
 
 </table>	
-	<div id="test1"></div>
+ 
 
 	 	
 	
 	</div> 
-    </div> 
-    
  
- <iframe src="https://www.buycott.com/upc/<?=$phpArray['upc_code']?>" width=100% height=100% frameborder=0>
+   
+ 
+ <iframe src="https://www.buycott.com/upc/<?=$phpArray['upc_code']?>" width=100% height=1600px frameborder=0>
  
  
  
  
  </iframe>
  
- 
- 
-
- 
    
+   
+   
+     </div> 
  
 
-<script type="text/javascript" src="{{asset('nulabel/js/jquery-1.8.2.min.js')}}"></script>
- 
-<script type="text/javascript" src="{{asset('js/mansory.js')}}"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-	eval( eval( $('#pre1').html() ) );
- });
-</script>
-
- 
+<?}?>

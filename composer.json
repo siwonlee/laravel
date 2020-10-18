@@ -18,7 +18,8 @@
         "laravel/tinker": "^2.0",
         "laravelcollective/html": "^6.2",
         "livewire/livewire": "^2.0",
-        "nesbot/carbon": "^2.41"
+        "nesbot/carbon": "^2.41",
+        "nicolaslopezj/searchable": "^1.13"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

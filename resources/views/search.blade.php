@@ -6,13 +6,26 @@ $upc = Request::input('upc');
 @extends('layouts.admin')
 
 @section('content')
-
+<?
+//dd($upcs);
+?>
  
 
 <div class="px-3  py-2">
 <div class="px-10 py-4  text-3xl inline"  > <i class="nav-icon fas fa-search text-3xl" ></i> Search (UPC within APL) </div>
 </div>
  
+
+<div class="px-10 py-4   inline    ">
+
+    <div class="float-right mx-10 text-red-700 text-xl " >
+   @if ($upcs !=='' and $upcs->count() > 0)
+      {{$upcs->total()}} 
+   @endif 
+    </div>
+
+</div>
+
 
 
  
@@ -28,7 +41,7 @@ $upc = Request::input('upc');
     <div class="  items-baseline flex pt-2">
              
         <input type="text"     class=" text-lg     border rounded py-2 px-4 mb-3 focus:outline-none focus:bg-white w-1/3" 
-        placeholder="12 or 13 digit upc WITH the check digit"  autofocus name='upc'
+        placeholder="Type any keyword(s)"  autofocus name='upc' required
    @if ($upc)
     value="{{$upc}}"
    @else
@@ -73,7 +86,7 @@ $nu = optional($nu->getIngre);
 
 ">
 
-    <td class="p1 px1" width=10%> {{$c->verify_date}}  </td>
+    <td class="p-1 px-1" width='10%'> {{$c->verify_date}}  </td>
 
 
 
@@ -224,21 +237,20 @@ $nu = optional($nu->getIngre);
 </div>
 <div class="px-3 py-4   justify-between">
 
-{{-- {{ $upcs->links() }} --}}
+{{ $upcs->links() }}
 </div>
 
 
 </div>
 
  
-@elseif($upcs =='')
+@elseif($upc =='' )
 
-
+ 
 
 @else
 
-
-
+ 
 
  
 @include('detail_bare',['upc'=>$upc])

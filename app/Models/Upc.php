@@ -4,10 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Nicolaslopezj\Searchable\SearchableTrait;
 
 class Upc extends Model
 {
     use HasFactory;
+    use SearchableTrait;
+
+    protected $searchable = [
+        'columns' => [
+            'upc'  => 10,
+            'brand'   => 10,
+            'description'   => 10,
+            'pic'    => 10,
+ 
+        ]
+    ];
+
 
 protected $table = 'apl_upc';
 protected $fillable = [
