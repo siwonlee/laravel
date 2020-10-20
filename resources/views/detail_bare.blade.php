@@ -39,12 +39,13 @@ $upcCode = $upc;
 <div class="p-4">
   <span class="glyphicon glyphicon-exclamation-sign">  </span>  
   If you have no result, it means either that there is no information regarding the UPC or that the daily searching limit(500) reaches. 
-   For the latter case, visit <a href="http://factual.com/data/t/products-cpg-nutrition">here (factual.com).</a> Worth clicking  
+For the latter case, visit <a href="https://www.barcodelookup.com/{{$upcCode}}">here (barcodelookup.com).</a> Worth clicking  
    
     
  
- <a href="https://ndb.nal.usda.gov/ndb/search/list?qlookup=<?=$upcCode?>&qt=&manu=&SYNCHRONIZER_URI=%2Fndb%2Fsearch%2Flist&SYNCHRONIZER_TOKEN=ab8bca35-1970-4059-80ad-61c779222063&ds=Branded+Food+Products&lookup=<?=$upcCode?>" target=_blank><button type="button" class="btn sm  btn-primary">USDA</button></a>  
-  
+ {{-- <a href="https://ndb.nal.usda.gov/ndb/search/list?qlookup=<?=$upcCode?>&qt=&manu=&SYNCHRONIZER_URI=%2Fndb%2Fsearch%2Flist&SYNCHRONIZER_TOKEN=ab8bca35-1970-4059-80ad-61c779222063&ds=Branded+Food+Products&lookup=<?=$upcCode?>" target=_blank><button type="button" class="btn sm  btn-primary">USDA</button></a>   --}}
+ <a href=" https://ndb.nal.usda.gov/fdc-app.html#/?query={{$upcCode}}" target=_blank><button type="button" class="btn sm  btn-primary">USDA</button></a>  
+
  
  
    <a href="https://www.google.com/search?q=<?=$upcCode?>&source=lnms&tbm=isch&sa=X&ved=0CAgQ_AUoAmoVChMIoYr41Z2GyQIVSkMmCh3skAEC&biw=1920&bih=995" target=_blank><button type="button" class="btn sm  btn-primary">Google image</button></a>

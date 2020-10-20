@@ -165,7 +165,7 @@ $c_a54 = App\Models\Upc::where('verify',1)->where('category',54)->count() ;
 
         <div class="image">
           {{-- <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"> --}}
-          <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+          <img class=" h-10 w-10 rounded-full object-cover border-4 border-gray-100" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
         </div>
 
         <div class="info">
@@ -289,6 +289,19 @@ $c_a54 = App\Models\Upc::where('verify',1)->where('category',54)->count() ;
 
           </li>
 
+{{--  data for processor --}}
+
+<li class="nav-item has-treeview">
+  <a href="{{route('processor')}}" class="nav-link @if( $segment == 'data_for_p') active @endif">
+      <i class="nav-icon fas fa-sync-alt"></i>
+    <p>
+      DATA for WOW/SOAR
+
+    </p>
+  </a>
+
+</li>
+
 
 
           
@@ -304,6 +317,12 @@ $c_a54 = App\Models\Upc::where('verify',1)->where('category',54)->count() ;
   </a>
 
 </li>
+
+
+
+
+
+
 
 {{-- check digit --}}
 

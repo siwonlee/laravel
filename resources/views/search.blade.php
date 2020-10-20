@@ -147,17 +147,17 @@ $nu = optional($nu->getIngre);
 
     <tr class="border-b hover:bg-orange-100 bg-gray-100 align-top">
 
-    <td style="border-top:none;" >
+    <td style="border-top:none;" width=10% >
 @if ($c->image and !$c->pic )
-<img src="{{asset($c->image)}}" class="shadow rounded max-w-full h-auto align-middle border-none object-cover">
+<img src="{{asset($c->image)}}" class="shadow rounded    align-middle border-none object-contain">
 @endif
 
 @if ($c->pic and !$c->image)
-<img src="{{asset('storage/upload_img/'.$c->pic)}}" class="shadow rounded max-w-full h-auto align-middle border-none object-cover">
+<img src="{{asset('storage/upload_img/'.$c->pic)}}" class="shadow rounded    align-middle border-none object-contain">
 @endif
 
 @if ($c->image and $c->pic)
-<img src="{{asset($c->image)}}" class="shadow rounded max-w-full h-auto align-middle border-none object-cover">
+<img src="{{asset($c->image)}}" class="shadow rounded     align-middle border-none object-contain">
 @endif
     
     
@@ -175,7 +175,7 @@ $nu = optional($nu->getIngre);
     <div style="padding-top:0px;">  <a href="{{asset('/storage/upload_img/'.$c->pic2)}}">{{$c->pic2}}</a> </div>
     </td>
 
-    <td class="p-1 px-1" colspan=5>Nutrition : {{$nu->nutrition}}
+    <td class="p-1 px-1" colspan=4>Nutrition : {{$nu->nutrition}}
 
     <div style="padding-top:20px;">Benefit quantity : {{$c->benefit_qt}}</div>
     <div style="padding-top:0px;">Benefit UOM : {{$c->benefit_uom_wow}}</div>
