@@ -4,7 +4,19 @@
 @extends('layouts.admin')
 
 @section('content')
-   
+
+
+<?
+
+$datacount= 0;
+foreach($errs as $e){
+
+  $datacount = $datacount + count($e);
+
+ 
+}
+
+?>
  
 
 <div class="px-3  py-2">
@@ -25,7 +37,7 @@
             <th>UPC</th>
             <th>Brand</th>
             <th>Short_desc</th>
-            <th>Error</th>
+            <th>Incompletion</th>
 
 
         </tr>
@@ -384,7 +396,7 @@ $cnt=$cnt+1; $i=$i+1;
       
      <label>Just click the button to fix all the APL_type issues</label>
     
-    <a href="{{route('processor.apltype')}}"><button class="btn btn-success btn-sm"  type=submit >APL_compare fix</button></a>
+    <a href="{{route('processor.apltype')}}"><button class="btn btn-success btn-sm"  type=submit >APL_type fix</button></a>
     
     
   
@@ -430,24 +442,26 @@ $cnt=$cnt+1; $i=$i+1;
  
 
 <div>
- <?
- 
- IF(count($errs)==0){
-	 
-	 ?>
-	 
-	 
-	 
-	 <div class="alert alert-success"align=center >Horray!<br> No incomplete DATA..</div>
-	 
-	 
-	 
-	 
-	 <?
- }
- 
- ?>
 
+    @if ($datacount==0 )
+  
+    
+
+
+ 
+	 <div class="alert alert-success p-4"align=center >Horray!<br> No incomplete DATA..</div>
+
+
+
+    @endif
+ 
+	 
+	
+	 
+	 
+	 
+	 
+ 
 </div>
  
 </div>

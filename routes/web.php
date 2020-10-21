@@ -74,6 +74,8 @@ Route::get('/check_digit/plu', 'CheckdigitController@plu')->name('check_digit.pl
 Route::get('/search', 'SearchController@index')->name('search');
 Route::get('/search/general', 'SearchController@general')->name('search.general');
 Route::post('/search/{id}', 'SearchController@edit')->name('search.edit');
+Route::post('/search/category', 'SearchController@category')->name('search.category');
+
 
 Route::get('/data_for_p', 'ProcessorController@index')->name('processor');
 Route::get('/data_for_p/{id}', 'ProcessorController@edit')->name('processor.edit');

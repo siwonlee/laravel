@@ -145,6 +145,29 @@ return view('search')->with(['upcs'=>$result,'upc'=>$upc]);
 
 
 
+    public function category(Request $request)
+    {
+
+       
+$upc = $request->input('upc');
+
+$result = Upc::search($request->get('upc'))->paginate(10);
+
+
+// $result = Upc::where('upc', $upc)
+//         ->orWhere('brand',$upc)
+//         ->orWhere('description',$upc)
+//         ->orWhere('short_desc',$upc)
+//         ->orWhere('pic',$upc)
+//         ->orWhere('pic1',$upc)
+//         ->orWhere('pic2',$upc)
+//         ->orWhere('benefit_uom_wow',$upc)->get();
+
+return view('search')->with(['upcs'=>$result,'upc'=>$upc]);
+
+       
+        
+    }
 
 
 

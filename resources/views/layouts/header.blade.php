@@ -319,7 +319,7 @@ $error1 = DB::select("select * from apl_upc where verify like '1'  and (subcat_f
 
         <div class="image">
           {{-- <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"> --}}
-          <img class=" h-10 w-10 rounded-full object-cover border-4 border-gray-100" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+          <img class=" h-20 w-20 rounded-full object-cover border-4 border-gray-100" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
         </div>
 
         <div class="info">

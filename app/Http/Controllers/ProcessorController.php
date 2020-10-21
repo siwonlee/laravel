@@ -146,7 +146,7 @@ class ProcessorController extends Controller
         ) and (broadband_flag=1 or broadband_flag='')" );
         $error26 = DB::select("select * from apl_upc where verify like '1'  and (subcategory = '0' or subcategory = '' or subcategory = '000') " );
         $error27 = DB::select("select * from apl_upc where verify like '1'  and (apl_type !='9901' and apl_type !='9901,9902' and apl_type !='9901,9903') " );
- //       $error28 = DB::select("select * from apl_upc where verify like '1'  and char_length(upc_out)!='12' and char_length(upc_out)!='13' and char_length(upc_out)!='5' and char_length(upc_out)!='6' " );
+        $error28 = DB::select("select * from apl_upc where verify like '1'  and char_length(upc_out)!='12' and char_length(upc_out)!='13' and char_length(upc_out)!='5' and char_length(upc_out)!='6' " );
  
 // $errors = array(
 //     $error1,
@@ -208,7 +208,7 @@ class ProcessorController extends Controller
         'error25',
         'error26',
         'error27',
-    //    'error28' 
+        'error28' 
         );
     
     
@@ -320,13 +320,19 @@ class ProcessorController extends Controller
     public function apltype()
     {
   
-       DB::update("update apl_upc set compare=upc_out  where verify=1 and  length(compare)!=13 " );
-       DB::update("update apl_upc set compare=concat('0',upc_out)  where verify=1 and  compare='' and length(upc)=12 " );      
-       DB::update("update apl_upc set compare=upc_out  where verify=1 and  compare='' and length(upc)=13 " );  
-       DB::update("update apl_upc set compare=concat('0',upc_out)  where verify=1 and  length(compare)=12 " );  
 
  
-             return redirect()->back()->with('approved','The compare issue has been fixed.'); ;
+
+
+        DB::update(" update apl_upc set apl_type='9901,9902'  where verify=1 and  category =21 " );
+        DB::update(" update apl_upc set apl_type='9901,9902'  where verify=1 and category =31 " );
+        DB::update(" update apl_upc set apl_type='9901,9902'  where verify=1  and category =41 " );
+        DB::update(" update apl_upc set apl_type='9901' where verify=1   and category !=21 and category !=31 and category !=41 " );
+        DB::update(" update apl_upc set apl_type='9901,9903' where  upc=4469 " );
+ 
+
+ 
+             return redirect()->back()->with('approved','The apl type issue has been fixed.'); ;
 
   
     }
