@@ -1,9 +1,9 @@
 <?
 
-//dd($errors );
+dd($errs );
 
 // dd($errors);
-  foreach($errors as $e){
+  foreach($errs as $e){
 
 echo count($e)."<br>";
 

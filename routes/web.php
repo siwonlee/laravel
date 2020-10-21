@@ -76,8 +76,9 @@ Route::get('/search/general', 'SearchController@general')->name('search.general'
 Route::post('/search/{id}', 'SearchController@edit')->name('search.edit');
 
 Route::get('/data_for_p', 'ProcessorController@index')->name('processor');
- 
-
+Route::get('/data_for_p/{id}', 'ProcessorController@edit')->name('processor.edit');
+Route::get('/data_for_p/fix/compare', 'ProcessorController@compare')->name('processor.compare'); 
+Route::get('/data_for_p/fix/apltype', 'ProcessorController@apltype')->name('processor.apltype'); 
 
 
 Route::get('/checkdigit', function () {

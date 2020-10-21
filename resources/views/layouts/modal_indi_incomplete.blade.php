@@ -9,7 +9,7 @@
 
 
 		<?
-  
+  $alt=0;
   switch (true) {
 
 
@@ -58,7 +58,8 @@ echo "No brand";$alt = 10;
 break;
 
 case ($cnt >= 1100 and $cnt < 1200):
-echo "Incorrect length of UPC";$alt = 11;
+echo "Incorrect length of UPC";
+$alt = 11;
 break;
 
 case ($cnt >= 1200 and $cnt < 1300):
@@ -70,52 +71,66 @@ echo "Not matching sub category ";$alt = 13;
 break;
 
 case ($cnt >= 1400 and $cnt < 1500):
-echo "Not matching sub category ";$alt = 14;
+echo "Not matching sub category ";
+$alt = 14;
 break;
 
 case ($cnt >= 1500 and $cnt < 1600):
-echo "Incorrect length of subcategory";$alt = 15;
+echo "Incorrect length of subcategory";
+$alt = 15;
 break;
 
 case ($cnt >= 1600 and $cnt < 1700):
-echo "Incorrect length of category";$alt = 16;
+echo "Incorrect length of category";
+$alt = 16;
 break;
 
 case ($cnt >= 1700 and $cnt < 1800):
-echo "Not matching category";$alt = 17;
+echo "Not matching category";
+$alt = 17;
 break;
 
 case ($cnt >= 1800 and $cnt < 1900):
-echo "Not matching category";$alt = 18;
+echo "Not matching category";
+$alt = 18;
 break;
 
 case ($cnt >= 1900 and $cnt < 2000):	
-echo "No or wrong benefit UOM";$alt = 19;
+echo "No or wrong benefit UOM";
+$alt = 19;
 break;
 
 
 
 case ($cnt >= 2300 and $cnt < 2400):
-echo "Different sub categories";$alt = 23;
+echo "Different sub categories";
+$alt = 23;
 break;
 
 case ($cnt >= 2400 and $cnt < 2500):
-echo "Wrong Broadband";$alt = 24;
+echo "Wrong Broadband";
+$alt = 24;
 break;
 
 case ($cnt >= 2500 and $cnt < 2600):
-echo "Wrong Broadband";$alt = 25;
+echo "Wrong Broadband";
+$alt = 25;
 break;
 
 case ($cnt >= 2600 and $cnt < 2700):
-echo "No or Wrong subcategory assigned ";$alt = 26;
+echo "No or Wrong subcategory assigned ";
+$alt = 26;
 break;
 
 
 }
   
-  
+ 
   ?>
+
+
+
+
 
  
 <button class="btn btn-default btn-sm  ">
@@ -127,7 +142,7 @@ break;
 </tr>
  
 
-<form action="sw_upc_edit_incomplete.php">
+<form action="{{route('processor.edit',['id'=>$data1->id])}}">
 
 	<input name = "id" class="form-control" type=hidden value="{{$data1->id}}"  />
 	<input name = "time" class="form-control  "  type=hidden value=" {{Carbon::now()->format('Y-m-d')}}"  / >
@@ -144,12 +159,12 @@ break;
 	<table class="table">
 		<tr>
 			<td width=200px>Upc</td>
-			<td @if($alt==11) class="has-error"@endif><input name="upc" class="form-control"	type=text value="{{$data1->upc}}"></input></td>
+			<td ><input name="upc" class="form-control @if($alt==11) border-2 border-red-600 @endif"	type=text value="{{$data1->upc}}"></input></td>
 			<td>8,12 or 13 digits only, The current length :<font color=red> {{strlen($data1->upc)}} </font> </td>
 		</tr>
 		<tr>
 			<td width=200px>Brand</td>
-			<td @if($alt==10) class="has-error"@endif><input name="brand" class="form-control" type=text value="{{$data1->brand}}"></input>
+			<td ><input name="brand" class="form-control @if($alt==10) border-2 border-red-600 @endif" type=text value="{{$data1->brand}}"></input>
 			</td>
 			<td></td>
 		</tr>
@@ -162,8 +177,8 @@ break;
 
 		<tr>
 			<td width=200px>Short_desc</td>
-		<td @if($alt==8) class="has-error"@endif><input id="{{$cnt}}desc" name="short_desc1"
-					maxlength=24 class="form-control" type=text value="{{$data1->short_desc}}"
+		<td ><input id="{{$cnt}}desc" name="short_desc"
+					maxlength=24 class="form-control @if($alt==8) border-2 border-red-600 @endif" type=text value="{{$data1->short_desc}}"
 		onkeyup=display_strlen{{$cnt}}()></input></td>
 			<td>limits up to 24 characters <font color=red><span id="{{$cnt}}spit"></span> </font>
 			</td>
@@ -180,8 +195,9 @@ break;
 
 		<tr>
 			<td width=200px>Category</td>
-			<td @if($alt==2 or $alt==16 or $alt==17 or $alt==18) class="has-error"@endif>
-				<input name="category" maxlength=2 class="form-control" type=text value="@if($data1->category_full){{$data1->category_full}}@elseif(strlen($data1->category)==1){{'0'.$data1->category}}
+			<td >
+				<input name="category_full" maxlength=2 class="form-control @if($alt==2 or $alt==16 or $alt==17 or $alt==18) 
+				border-2 border-red-600 @endif" type=text value="@if($data1->category_full){{$data1->category_full}}@elseif(strlen($data1->category)==1){{'0'.$data1->category}}
 				@elseif(strlen($data1->category)==2){{$data1->category}}@endif"></input>
 			</td>
 			<td>2 characters, example : "02", verified : <font color=red> {{$data1->category}}</font>
@@ -190,15 +206,10 @@ break;
 
 		<tr>
 			<td width=200px>Sub_category</td>
-			<td @if($alt==1 or $alt==12 or $alt==13 or $alt==14 or $alt==15 or $alt==23 or
-				$alt==26) class="has-error"@endif >
-				<input name="subcate" maxlength=3 class="form-control form-control-danger" type=text
-					value="@if($data1->subcat_full){{$data1->subcat_full}}
-					@elseif(strlen($data1->subcategory)==1)
-					{{'00'.$data1->subcategory }}
-					@elseif(strlen($data1->subcategory)==2)
-					{{'0'.$data1->subcategory}}
-					@endif"></input>
+			<td >
+				<input name="subcat_full" maxlength=3 class="form-control form-control-danger @if($alt==1 or $alt==12 or $alt==13 or $alt==14 or $alt==15 or $alt==23 or
+				$alt==26) border-2 border-red-600 @endif " type=text
+					value="@if($data1->subcat_full){{$data1->subcat_full}}@elseif(strlen($data1->subcategory)==1){{'00'.$data1->subcategory }}@elseif(strlen($data1->subcategory)==2){{'0'.$data1->subcategory}}@endif"></input>
 			</td>
 			<td>3 characters, example : "002" , verified : <font color=red> {{$data1->subcategory}}	</font>
 			</td>
@@ -207,41 +218,41 @@ break;
 
 		<tr>
 			<td width=200px>Benefit UOM</td>
-			<td @if($alt==7 or $alt==19) class="has-error"@endif >
-				<select name="benefit_uom_wow" maxlength=3 class="form-control">
-					<option @if ($data1->benefit_uom_wow=='' ) "selected" @endif value="">Select One
+			<td >
+				<select name="benefit_uom_wow" maxlength=3 class="form-control @if($alt==7 or $alt==19) border-2 border-red-600 @endif ">
+					<option @if ($data1->benefit_uom_wow=='' ) selected @endif value="">Select One
 					</option>
-					<option @if ($data1->benefit_uom_wow=='$$$' ) "selected" @endif	value="$$$">$$$
+					<option @if ($data1->benefit_uom_wow=='$$$' ) selected @endif	value="$$$">$$$
 					</option>
-					<option @if ($data1->benefit_uom_wow=='BAG') "selected" @endif value="BAG">BAG
+					<option @if ($data1->benefit_uom_wow=='BAG') selected @endif value="BAG">BAG
 					</option>
-					<option @if ($data1->benefit_uom_wow=='CAN') "selected" @endif value="CAN">CAN
-					</option>
-
-					<option @if ($data1->benefit_uom_wow=='CBL') "selected" @endif value="CBL">CBL
-					</option>
-					<option @if ($data1->benefit_uom_wow=='CTR') "selected" @endif value="CTR">CTR
+					<option @if ($data1->benefit_uom_wow=='CAN') selected @endif value="CAN">CAN
 					</option>
 
-					<option @if ($data1->benefit_uom_wow=='DOZ') "selected" @endif value="DOZ">DOZ
+					<option @if ($data1->benefit_uom_wow=='CBL') selected @endif value="CBL">CBL
 					</option>
-					<option @if ($data1->benefit_uom_wow=='GAL') "selected" @endif value="GAL">GAL
-					</option>
-
-					<option @if ($data1->benefit_uom_wow=='HGL') "selected" @endif value="HGL">HGL
+					<option @if ($data1->benefit_uom_wow=='CTR') selected @endif value="CTR">CTR
 					</option>
 
+					<option @if ($data1->benefit_uom_wow=='DOZ') selected @endif value="DOZ">DOZ
+					</option>
+					<option @if ($data1->benefit_uom_wow=='GAL') selected @endif value="GAL">GAL
+					</option>
 
-					<option @if ($data1->benefit_uom_wow=='JBG') "selected" @endif value="JBG">JBG
-					</option>
-					<option @if ($data1->benefit_uom_wow=='LB') "selected" @endif value="LB">LB
+					<option @if ($data1->benefit_uom_wow=='HGL') selected @endif value="HGL">HGL
 					</option>
 
-					<option @if ($data1->benefit_uom_wow=='OZ') "selected" @endif value="OZ">OZ
+
+					<option @if ($data1->benefit_uom_wow=='JBG') selected @endif value="JBG">JBG
 					</option>
-					<option @if ($data1->benefit_uom_wow=='PKG') "selected" @endif value="PKG">PKG
+					<option @if ($data1->benefit_uom_wow=='LB') selected @endif value="LB">LB
 					</option>
-					<option @if ($data1->benefit_uom_wow=='QT') "selected" @endif value="QT">QT
+
+					<option @if ($data1->benefit_uom_wow=='OZ') selected @endif value="OZ">OZ
+					</option>
+					<option @if ($data1->benefit_uom_wow=='PKG') selected @endif value="PKG">PKG
+					</option>
+					<option @if ($data1->benefit_uom_wow=='QT') selected @endif value="QT">QT
 					</option>
 
 
@@ -252,25 +263,25 @@ break;
 		</tr>
 		<tr>
 			<td width=200px>Effective Date</td>
-			<td @if($alt==3) class="has-error"@endif><input name="verify_date" class="form-control"
+			<td><input name="verify_date" class="form-control @if($alt==3) border-2 border-red-600 @endif"
 					type=text value="{{$data1->verify_date}}"></input></td>
 			<td>YYYY-MM-DD, example : "2017-01-31"</td>
 		</tr>
 		<tr>
 			<td width=200px>End Date</td>
-			<td @if($alt==4) class="has-error"@endif><input name="end_date" class="form-control"
+			<td  ><input name="end_date" class="form-control @if($alt==4) border-2 border-red-600  @endif  "
 					type=text value="@if($data1->end_date) {{$data1->end_date}}   @else 2024-12-31 @endif "></input></td>
 			<td>"2024-12-31" if it is an approved item.</td>
 		</tr>
 		<tr>
 			<td width=200px>Benefit QT</td>
-			<td @if($alt==5) class="has-error"@endif><input name="benefit_qt" class="form-control"
+			<td ><input name="benefit_qt"  class="form-control @if($alt==5) border-2 border-red-600 @endif"
 					type=text value="{{$data1->benefit_qt}}"></input></td>
 			<td> The issued QTY deducting unit</td>
 		</tr>
 		<tr>
 			<td width=200px>PLU Indicator</td>
-			<td @if($alt==6) class="has-error"@endif>
+			<td   @if($alt==6) class = "border-b-2 border-red-600" @endif>
 				<label class="radio-inline">
 					<input type="radio" name="plu_indicator" value="P" 
 					@if($data1->plu_indicator == 'P' or strlen($data1->upc) == 4 or
@@ -292,7 +303,7 @@ break;
 		</tr>
 		<tr>
 			<td width=200px>Broad Band</td>
-			<td @if($alt==9 or $alt==24 or $alt==25) class="has-error"@endif>
+			<td @if($alt==9 or $alt==24 or $alt==25) class="border-b-2 border-red-600" @endif>
 
 				<label class="radio-inline"><input type="radio" name="broadband_flag" value="0" 
 					@if($data1->broadband_flag==0)

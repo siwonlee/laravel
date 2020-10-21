@@ -31,16 +31,16 @@ class ProcessorController extends Controller
         // $error9 = Upc::where('verify', 1)->where('broadband_flag', '')->get();
         // $error10 = Upc::where('verify', 1)->where('brand', '')->get();
 
-        $error1 = DB::select("select * from apl_upc where verify like '1'  and subcat_full = '' ");
-        $error2 = DB::select("select * from apl_upc where verify like '1'  and category_full = '' ");
-        $error3 = DB::select("select * from apl_upc where verify like '1'  and verify_date = '' ");
-        $error4 = DB::select("select * from apl_upc where verify like '1'  and end_date = '' ");
-        $error5 = DB::select("select * from apl_upc where verify like '1'  and benefit_qt = '' ");
-        $error6 = DB::select("select * from apl_upc where verify like '1'  and plu_indicator = '' ");
-        $error7 = DB::select("select * from apl_upc where verify like '1'  and benefit_uom_wow = '' ");
-        $error8 = DB::select("select * from apl_upc where verify like '1'  and short_desc = '' ");
-        $error9 = DB::select("select * from apl_upc where verify like '1'  and broadband_flag = '' ");
-        $error10 = DB::select("select * from apl_upc where verify like '1'  and brand = '' ");
+        $error1 = DB::select("select * from apl_upc where verify like '1'  and (subcat_full = '' or subcat_full is NULL) ");
+        $error2 = DB::select("select * from apl_upc where verify like '1'  and (category_full = '' or category_full is NULL)");
+        $error3 = DB::select("select * from apl_upc where verify like '1'  and (verify_date = '' or verify_date is NULL)");
+        $error4 = DB::select("select * from apl_upc where verify like '1'  and (end_date = '' or end_date is NULL)");
+        $error5 = DB::select("select * from apl_upc where verify like '1'  and (benefit_qt = '' or benefit_qt is NULL)");
+        $error6 = DB::select("select * from apl_upc where verify like '1'  and (plu_indicator = '' or plu_indicator is NULL) ");
+        $error7 = DB::select("select * from apl_upc where verify like '1'  and (benefit_uom_wow = '' or benefit_uom_wow is NULL) ");
+        $error8 = DB::select("select * from apl_upc where verify like '1'  and (short_desc = '' or short_desc is NULL) ");
+        $error9 = DB::select("select * from apl_upc where verify like '1'  and (broadband_flag = '' or broadband_flag is NULL) ");
+        $error10 = DB::select("select * from apl_upc where verify like '1'  and (brand = '' or brand is NULL) ");
 
 
 
@@ -53,14 +53,14 @@ class ProcessorController extends Controller
         $error14 = DB::select("select * from apl_upc where subcategory != right(subcat_full,3) and verify=1 and length(subcategory)=3" );
 
         $error15 = DB::select("select * from apl_upc where length(subcat_full) != 3 and verify=1" );
-        $error16 = DB::select("select * from apl_upc where  length(category_full) != 2 and verify=1" );
+        $error16 = DB::select("select * from apl_upc where length(category_full) != 2 and verify=1" );
         $error17 = DB::select("select * from apl_upc where category != right(category_full,1) and verify=1 and length(category)=1" );
         $error18 = DB::select("select * from apl_upc where category != right(category_full,2) and verify=1 and length(category)=2" );
 
-        $error19 = DB::select("select * from apl_upc where benefit_uom_wow = '' and verify = '1'" );
+ //       $error19 = DB::select("select * from apl_upc where benefit_uom_wow = '' or and verify = '1'" ); error7과 동일
       //  $error20 = DB::select("Select * From up_indi Where verify=1   and moved != 1 " );
         $error21 = DB::select("select * from apl_upc where verify like '1'  and length(compare) !=13 " );
-        $error22 = DB::select(" select upc, count(*) from apl_upc group by upc having count(*) >1" );
+        $error22 = DB::select("select upc, count(*) from apl_upc group by upc having count(*) >1" );
         $error23 = DB::select("SELECT * from apl_upc where (CAST(subcat_full AS UNSIGNED) != subcategory) and verify=1 " );
         $error24 = DB::select("select * from apl_upc where verify like '1' and approved='yes' 
         and ( 
@@ -146,7 +146,7 @@ class ProcessorController extends Controller
         ) and (broadband_flag=1 or broadband_flag='')" );
         $error26 = DB::select("select * from apl_upc where verify like '1'  and (subcategory = '0' or subcategory = '' or subcategory = '000') " );
         $error27 = DB::select("select * from apl_upc where verify like '1'  and (apl_type !='9901' and apl_type !='9901,9902' and apl_type !='9901,9903') " );
-        $error28 = DB::select("select * from apl_upc where verify like '1'  and char_length(upc_out)!='12' and char_length(upc_out)!='13' and char_length(upc_out)!='5' and char_length(upc_out)!='6' " );
+ //       $error28 = DB::select("select * from apl_upc where verify like '1'  and char_length(upc_out)!='12' and char_length(upc_out)!='13' and char_length(upc_out)!='5' and char_length(upc_out)!='6' " );
  
 // $errors = array(
 //     $error1,
@@ -199,52 +199,28 @@ class ProcessorController extends Controller
         'error16',
         'error17',
         'error18',
-        'error19',
+     //   'error19', error7과 동일
      //  'error20',
-        'error21',
-        'error22',
+       'error21',
+       'error22',
         'error23',
         'error24',
         'error25',
         'error26',
         'error27',
-        'error28' 
+    //    'error28' 
         );
     
     
 
-        return view('processor')-> with('errs', $errors)   ;
-//   return view('t1')-> with('errors', $errors)   ;
+      return view('processor')-> with('errs', $errors)   ;
+//    return view('t1')-> with('errs', $errors)   ;
 
     }
    
     
 
-    public function general(Request $request)
-    {
-
-       
-$upc = $request->input('upc');
-
-$result = Upc::search($request->get('upc'))->paginate(10);
-
-
-// $result = Upc::where('upc', $upc)
-//         ->orWhere('brand',$upc)
-//         ->orWhere('description',$upc)
-//         ->orWhere('short_desc',$upc)
-//         ->orWhere('pic',$upc)
-//         ->orWhere('pic1',$upc)
-//         ->orWhere('pic2',$upc)
-//         ->orWhere('benefit_uom_wow',$upc)->get();
-
-return view('search')->with(['upcs'=>$result,'upc'=>$upc]);
-
-       
-        
-    }
-
-
+ 
     
     public function edit(Request $request, $id)
     {
@@ -253,16 +229,7 @@ return view('search')->with(['upcs'=>$result,'upc'=>$upc]);
         $request->validate([
         
             'upc' => 'required',
-            'category_full' => 'required',
-            'subcat_full' => 'required',
-            'brand' => 'required',
-            'description' => 'required',
-            'short_desc' => 'required',
-    
-            'high_cost' => 'required',
-            'benefit_qt' => 'required',
-            'benefit_uom_wow' => 'required',
-            'verify_date' => 'required',
+ 
          
 
         ]);
@@ -306,7 +273,7 @@ return view('search')->with(['upcs'=>$result,'upc'=>$upc]);
         Upc::where('id', $id)
               ->update([
  
-       
+                'upc'=>$upc,
                  'edit_date'=>$time,
                  'edit_staff'=>$staff,
         
@@ -330,32 +297,42 @@ return view('search')->with(['upcs'=>$result,'upc'=>$upc]);
                  ]);
  
 
-
-
-
               return redirect()->back()->with('approved','The item( '.$upc.' ) has been updated.');
 
  
 
     }
 
+    public function compare()
+    {
+  
+       DB::update("update apl_upc set compare=upc_out  where verify=1 and  length(compare)!=13 " );
+       DB::update("update apl_upc set compare=concat('0',upc_out)  where verify=1 and  compare='' and length(upc)=12 " );      
+       DB::update("update apl_upc set compare=upc_out  where verify=1 and  compare='' and length(upc)=13 " );  
+       DB::update("update apl_upc set compare=concat('0',upc_out)  where verify=1 and  length(compare)=12 " );  
 
+ 
+             return redirect()->back()->with('approved','The compare issue has been fixed.'); ;
+
+  
+    }
+
+    public function apltype()
+    {
+  
+       DB::update("update apl_upc set compare=upc_out  where verify=1 and  length(compare)!=13 " );
+       DB::update("update apl_upc set compare=concat('0',upc_out)  where verify=1 and  compare='' and length(upc)=12 " );      
+       DB::update("update apl_upc set compare=upc_out  where verify=1 and  compare='' and length(upc)=13 " );  
+       DB::update("update apl_upc set compare=concat('0',upc_out)  where verify=1 and  length(compare)=12 " );  
+
+ 
+             return redirect()->back()->with('approved','The compare issue has been fixed.'); ;
+
+  
+    }
 
    
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
+  
    
    
    
